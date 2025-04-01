@@ -12,8 +12,8 @@ public class RoleModel {
     private String nome;
 
     public enum values{
-        ADMIN(1L),
-        USER(2L);
+        ROLE_ADMIN(1L),
+        ROLE_USER(2L);
 
         Long roleId;
 

@@ -19,8 +19,8 @@ public class RolesConfig implements CommandLineRunner {
     }
 
     private void createRolesIfNotExist() {
-        createRoleIfNotExist(RoleModel.values.ADMIN);
-        createRoleIfNotExist(RoleModel.values.USER);
+        createRoleIfNotExist(RoleModel.values.ROLE_ADMIN);
+        createRoleIfNotExist(RoleModel.values.ROLE_USER);
     }
 
     private void createRoleIfNotExist(RoleModel.values roleEnum) {
