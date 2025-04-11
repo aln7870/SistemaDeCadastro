@@ -35,10 +35,10 @@ public class AdminUserConfig implements CommandLineRunner {
         Optional<UserModel> userAdmin = userRepository.findByEmail("admin@gmail.com");
 
         if (userAdmin.isEmpty()) {
-            RoleModel roleAdmin = roleRepository.findByNome("ROLE_ADMIN");
+            RoleModel roleAdmin = roleRepository.findByNome("ADMIN");
             if (roleAdmin == null) {
                 roleAdmin = new RoleModel();
-                roleAdmin.setNome("ROLE_ADMIN");
+                roleAdmin.setNome("ADMIN");
                 roleRepository.save(roleAdmin);
             }
 

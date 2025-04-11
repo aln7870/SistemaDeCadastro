@@ -43,12 +43,11 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers("/usuario/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/admin/**").hasAuthority("SCOPE_ADMIN")
+                        .requestMatchers("/usuario/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2
                                 .jwt(Customizer.withDefaults())
-                //        .jwt(jwt -> jwt.decoder(jwtDecoder))
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 

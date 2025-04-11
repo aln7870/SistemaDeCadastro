@@ -57,9 +57,7 @@ public class LoginController {
                 .subject(user.get().getIdUsuario().toString())
                 .issuedAt(now)
                 .expiresAt(now.plusSeconds(expiresIn))
-                .claim("scope", user.get().getRoles().stream()
-                        .map(RoleModel::getNome)
-                        .collect(Collectors.toList()))  //listando as roles do usuario
+                .claim("scope", scope) //listando as roles do usuario
                 .build();
 
         var jwtValue = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
