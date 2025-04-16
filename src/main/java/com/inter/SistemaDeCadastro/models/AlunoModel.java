@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -21,7 +22,7 @@ public class AlunoModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false)
+	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codAluno;
 	
 	@Column(length = 150, nullable = false)
@@ -54,8 +55,16 @@ public class AlunoModel {
     @CreationTimestamp
     private LocalDateTime dt_Cadastro;
 	
-	@Column(length = 1, nullable = false)
-	private char status;
+	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+	    @Pattern(regexp = "[AI]")
+	    private String status = "A";
+
+	    @PrePersist
+	    public void prePersist() {
+	        if (status == null) {
+	            status = "A";
+	        }
+	    }
 	
 	public AlunoModel() {
     }
@@ -116,10 +125,10 @@ public class AlunoModel {
 	public void setDataCadast(LocalDateTime dataCadast) {
 		this.dt_Cadastro = dataCadast;
 	}
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(char status) {
+	public void setStatus (String status) {
 		this.status = status;
 	}
 

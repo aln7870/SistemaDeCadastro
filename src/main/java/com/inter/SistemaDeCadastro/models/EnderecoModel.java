@@ -11,7 +11,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "Endereco")
@@ -19,7 +21,7 @@ public class EnderecoModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false)
+	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codEndereco;
 	
 	@Column(length = 10, nullable = false)
@@ -47,8 +49,16 @@ public class EnderecoModel {
     @JoinColumn(name = "codAluno", nullable = false)
 	private AlunoModel aluno;
 	
-	@Column(length = 1, nullable = false)
-	private char status;
+	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+    @Pattern(regexp = "[AI]")
+    private String status = "A";
+
+    @PrePersist
+    public void prePersist() {
+        if (status == null) {
+            status = "A";
+        }
+    }
 	
 	public EnderecoModel() {
 		
@@ -126,11 +136,11 @@ public class EnderecoModel {
 		this.aluno = aluno;
 	}
 
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	

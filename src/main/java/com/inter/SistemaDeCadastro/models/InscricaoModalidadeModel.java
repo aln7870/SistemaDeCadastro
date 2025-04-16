@@ -15,7 +15,7 @@ public class InscricaoModalidadeModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false)
+	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codInscricaoModalidade;
 	
 

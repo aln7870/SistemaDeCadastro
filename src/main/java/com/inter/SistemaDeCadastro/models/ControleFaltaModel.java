@@ -9,7 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "Aluno")
@@ -17,25 +19,58 @@ public class ControleFaltaModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false)
+	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codControleFalta;
 	
-	@Column(length = 1, nullable = false)
-	private char falta;
+	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'P'")
+    @Pattern(regexp = "[PF]")
+    private String falta = "P";
 	
 	@Column(updatable = false)
     private Date dataFalta;
 	
 	@ManyToOne
     @JoinColumn(name = "idUsuario", nullable = false)
+	@Column(columnDefinition = "INT UNSIGNED")
 	private UserModel user;
 	
 	@ManyToOne
     @JoinColumn(name = "codInscricaoModalidade", nullable = false)
+	@Column(columnDefinition = "INT UNSIGNEDT")
 	private InscricaoModalidadeModel inscricaoModalidade;
 	
-	@Column(length = 1, nullable = false)
-	private char status;
+	public enum tipoFalta {
+		REFORCO,
+		MODALIDADE;
+	}
+	
+	public enum statusFalta{
+		PENDENTE,
+		CONFIRMADO;
+	}
+	
+	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+    @Pattern(regexp = "[AI]")
+    private String status = "A";
+	
+	//PrePersist aqui
+	@PrePersist
+    public void prePersistFalta() {
+        if (falta == null) {
+            falta = "P";
+        }
+    }
+
+    @PrePersist
+    public void prePersist() {
+        if (status == null) {
+            status = "A";
+        }
+    }
+    
+    public ControleFaltaModel() {
+    	
+    }
 
 	public Long getCodControleFalta() {
 		return codControleFalta;
@@ -45,11 +80,11 @@ public class ControleFaltaModel {
 		this.codControleFalta = codControleFalta;
 	}
 
-	public char getFalta() {
+	public String getFalta() {
 		return falta;
 	}
 
-	public void setFalta(char falta) {
+	public void setFalta(String falta) {
 		this.falta = falta;
 	}
 
@@ -77,11 +112,11 @@ public class ControleFaltaModel {
 		this.inscricaoModalidade = inscricaoModalidade;
 	}
 
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	

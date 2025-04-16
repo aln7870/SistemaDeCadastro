@@ -1,25 +1,21 @@
 package com.inter.SistemaDeCadastro.models;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.Pattern;
 
-@Entity
-@Table(name = "Ocupacao")
-public class OcupacaoModel {
+public class ParentescoModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
-	private Long codOcupacao;
+	private Long codParentesco;
 	
-	@Column(length = 100, nullable = false)
-	private String nm_Modalidade;
+	@Column(length = 50, nullable = false)
+	private String nm_Aluno;
 	
 	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
     @Pattern(regexp = "[AI]")
@@ -31,25 +27,25 @@ public class OcupacaoModel {
             status = "A";
         }
     }
-	
-	public OcupacaoModel() {
-		
+    
+    public ParentescoModel() {
+    	
+    }
+
+	public Long getCodParentesco() {
+		return codParentesco;
 	}
 
-	public Long getCodOcupacao() {
-		return codOcupacao;
+	public void setCodParentesco(Long codParentesco) {
+		this.codParentesco = codParentesco;
 	}
 
-	public void setCodOcupacao(Long codOcupacao) {
-		this.codOcupacao = codOcupacao;
+	public String getNm_Aluno() {
+		return nm_Aluno;
 	}
 
-	public String getNm_Modalidade() {
-		return nm_Modalidade;
-	}
-
-	public void setNm_Modalidade(String nm_Modalidade) {
-		this.nm_Modalidade = nm_Modalidade;
+	public void setNm_Aluno(String nm_Aluno) {
+		this.nm_Aluno = nm_Aluno;
 	}
 
 	public String getStatus() {
@@ -59,7 +55,7 @@ public class OcupacaoModel {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
+    
+    
 
 }

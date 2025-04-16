@@ -2,6 +2,7 @@ package com.inter.SistemaDeCadastro.models;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -10,6 +11,7 @@ public class SaudeModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
     private Long codSaude;
 
     @Size(max = 255)
@@ -28,8 +30,16 @@ public class SaudeModel {
     @Column(name = "tipoDeficiencia", columnDefinition = "TINYTEXT")
     private String tipoDeficiencia;
 
-    @Column(length = 1, nullable = false)
-	private char status;
+    @Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+    @Pattern(regexp = "[AI]")
+    private String status = "A";
+
+    @PrePersist
+    public void prePersist() {
+        if (status == null) {
+            status = "A";
+        }
+    }
     
     
     public SaudeModel() {
@@ -76,11 +86,11 @@ public class SaudeModel {
         this.tipoDeficiencia = tipoDeficiencia;
     }
 
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

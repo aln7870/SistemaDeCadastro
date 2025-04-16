@@ -9,7 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "Familiar")
@@ -17,7 +19,7 @@ public class FamiliarModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false)
+	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codFamiliar;
 	
 	@Column(length = 150, nullable = false)
@@ -25,6 +27,23 @@ public class FamiliarModel {
 	
 	@Column(updatable = false)
     private Date dt_Nascimento;
+	
+	public enum parentesco{
+		PAI,
+		MÃE, 
+		AVÔ, 
+		AVÓ, 
+		TIO, 
+		TIA,
+		IRMÃO,
+		IRMÃ,
+		PADRASTO,
+		MADRASTA,
+		GUARDIÃO_LEGAL,
+		RESPONSÁVEL_LEGAL,
+		TUTOR,
+		CUIDADOR;
+	}
 	
 	@ManyToOne
     @JoinColumn(name = "codAluno", nullable = false)
@@ -38,8 +57,16 @@ public class FamiliarModel {
     @JoinColumn(name = "codEscolaridade", nullable = false)
 	private EscolaridadeModel escolaridade;
 	
-	@Column(length = 1, nullable = false)
-	private char status;
+	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+    @Pattern(regexp = "[AI]")
+    private String status = "A";
+
+    @PrePersist
+    public void prePersist() {
+        if (status == null) {
+            status = "A";
+        }
+    }
 	
 	public FamiliarModel(){
 		
@@ -93,11 +120,11 @@ public class FamiliarModel {
 		this.escolaridade = escolaridade;
 	}
 
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	

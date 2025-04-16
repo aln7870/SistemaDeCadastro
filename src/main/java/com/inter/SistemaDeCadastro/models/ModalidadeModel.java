@@ -5,7 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "Modalidade")
@@ -13,14 +15,22 @@ public class ModalidadeModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false)
+	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codModalidade;
 	
 	@Column(length = 50, nullable = false)
 	private String nm_Modalidade;
 	
-	@Column(length = 1, nullable = false)
-	private char status;
+	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+    @Pattern(regexp = "[AI]")
+    private String status = "A";
+
+    @PrePersist
+    public void prePersist() {
+        if (status == null) {
+            status = "A";
+        }
+    }
 	
 	public ModalidadeModel() {
     }
@@ -41,11 +51,11 @@ public class ModalidadeModel {
 		this.nm_Modalidade = nm_Modalidade;
 	}
 
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
