@@ -34,22 +34,21 @@ public class LoginController {
     @PostMapping
     public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
 
-        Optional<UserModel> user = userRepository.findByEmail(loginRequest.email());
+        Optional<UserModel> user = userRepository.findByEmail(loginRequest.nm_usuario());
 
         if (user.isEmpty()) {
             throw new BadCredentialsException("usuario vazio");
         }
 
         if (!passwordEncoder.matches(loginRequest.senha(), user.get().getSenha())) {
-            //(!user.get().isLoginCorrect(loginRequest, passwordEncoder)){
             throw new BadCredentialsException("senha incorreta");
         }
 
         var now = Instant.now(); // horario atual
-        var expiresIn = 300L;   //5 minutos
+        var expiresIn = 1200L;   //20 minutos
         var scope = user.get().getRoles()
                 .stream()
-                .map(RoleModel::getNome)
+                .map(RoleModel::getNm_role)
                 .collect(Collectors.joining());
 
         var claims = JwtClaimsSet.builder()

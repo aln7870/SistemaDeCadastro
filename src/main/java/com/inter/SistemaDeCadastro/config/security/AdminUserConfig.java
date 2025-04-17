@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import java.util.Optional;
 import java.util.Set;
 
@@ -38,13 +37,12 @@ public class AdminUserConfig implements CommandLineRunner {
             RoleModel roleAdmin = roleRepository.findByNome("ADMIN");
             if (roleAdmin == null) {
                 roleAdmin = new RoleModel();
-                roleAdmin.setNome("ADMIN");
+                roleAdmin.setNm_role("ADMIN");
                 roleRepository.save(roleAdmin);
             }
 
             UserModel admin = new UserModel();
-            admin.setNome("Adm do Sistema");
-            admin.setEmail("admin@gmail.com");
+            admin.setNm_usuario("Adm do Sistema");
             admin.setSenha(passwordEncoder.encode("7870"));
             admin.setRoles(Set.of(roleAdmin));
             userRepository.save(admin);

@@ -15,18 +15,15 @@ public class UserModel {
     @Column(columnDefinition = "INT UNSIGNED",nullable = false)
     private Long idUsuario;
 
-    @Column(length = 30, nullable = false)
-    private String nome;
-
-    @Column(length = 100, unique = true, nullable = false)
-    private String email;
+    @Column(length = 80, nullable = false, unique = true)
+    private String nm_usuario;
 
     @Column(nullable = false)
     private String senha;
 
     @Column(updatable = false)
     @CreationTimestamp
-    private LocalDateTime dataCriacao;
+    private LocalDateTime dataCadastro;
 
     //testando para o spring aceitar somente A OU I em status
     @Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
@@ -59,20 +56,12 @@ public class UserModel {
         this.idUsuario = idUsuario;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNm_usuario() {
+        return nm_usuario;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setNm_usuario(String nm_usuario) {
+        this.nm_usuario = nm_usuario;
     }
 
     public String getSenha() {
@@ -81,6 +70,22 @@ public class UserModel {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public LocalDateTime getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDateTime dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Set<RoleModel> getRoles() {
