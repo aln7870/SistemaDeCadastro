@@ -16,7 +16,7 @@ public class UserModel {
     private Long idUsuario;
 
     @Column(length = 80, nullable = false, unique = true)
-    private String nm_usuario;
+    private String nome;
 
     @Column(nullable = false)
     private String senha;
@@ -56,12 +56,12 @@ public class UserModel {
         this.idUsuario = idUsuario;
     }
 
-    public String getNm_usuario() {
-        return nm_usuario;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNm_usuario(String nm_usuario) {
-        this.nm_usuario = nm_usuario;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getSenha() {

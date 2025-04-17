@@ -21,7 +21,6 @@ public class EnderecoModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codEndereco;
 	
 	@Column(length = 10, nullable = false)

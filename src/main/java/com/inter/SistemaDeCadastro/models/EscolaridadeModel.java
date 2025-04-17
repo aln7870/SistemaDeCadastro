@@ -15,7 +15,6 @@ public class EscolaridadeModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codEscolaridade;
 	
 	@Column(length = 100, nullable = false)

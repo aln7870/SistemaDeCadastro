@@ -26,7 +26,7 @@ public class RolesConfig implements CommandLineRunner {
     private void createRoleIfNotExist(RoleModel.values roleEnum) {
         if (roleRepository.findByNome(roleEnum.name()) == null) {
             RoleModel role = new RoleModel();
-            role.setNm_role(roleEnum.name());
+            role.setNome(roleEnum.name());
             roleRepository.save(role);
             System.out.println("Role " + roleEnum.name() + " criada.");
         } else {

@@ -15,7 +15,6 @@ public class TurnoModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codTurno;
 	
 	@Column(length = 50, nullable = false)
@@ -30,9 +29,6 @@ public class TurnoModel {
         if (status == null) {
             status = "A";
         }
-    }
-	
-	public TurnoModel() {
     }
 
 	public Long getCodTurno() {
@@ -58,7 +54,4 @@ public class TurnoModel {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-	
 }

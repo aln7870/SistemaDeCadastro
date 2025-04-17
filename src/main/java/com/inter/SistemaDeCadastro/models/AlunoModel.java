@@ -4,16 +4,10 @@ package com.inter.SistemaDeCadastro.models;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
+import com.inter.SistemaDeCadastro.models.enums.NacionalidadeAlunoEnum;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 @Entity
@@ -22,32 +16,29 @@ public class AlunoModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codAluno;
 	
-	@Column(length = 150, nullable = false)
-	private String nm_Aluno;
+	@Column(name = "Nm_Aluno" ,length = 150, nullable = false)
+	private String nome;
 	
-	@Column(updatable = false)
-    private Date dt_Nascimento;
+	@Column(updatable = false, name = "Dt_Nascimento")
+    private Date dataNasc;
 	
-	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT NULL")
+	@Column(name = "Sexo",length = 1, columnDefinition = "CHAR(1) DEFAULT NULL")
     @Pattern(regexp = "[MF]")
     private String sexo;
 	
-	@Column(length = 14, nullable = false)
+	@Column(name = "CPF" ,length = 14, nullable = false)
 	private String cpf;
 	
 	
-	@Column(length = 10, nullable = false)
+	@Column(name = "RG" , length = 10, nullable = false)
 	private String rg;
-	
-	
-	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT NULL")
-    @Pattern(regexp = "[]")
-	private char nacionalidade;
-	
-	
+
+	@Column(name = "Nacionalidade", columnDefinition = "ENUM('BRASILEIRO', 'ESTRANGEIRO') DEFAULT 'BRASILEIRO'")
+	@Enumerated(EnumType.STRING)
+	private NacionalidadeAlunoEnum nacionalidade;
+
     @Column(nullable = false)
 	private Long codEscolaridade;
 	
@@ -65,10 +56,7 @@ public class AlunoModel {
 	            status = "A";
 	        }
 	    }
-	
-	public AlunoModel() {
-    }
-	
+
 	public Long getCodAluno() {
 		return codAluno;
 	}
@@ -76,60 +64,76 @@ public class AlunoModel {
 	public void setCodAluno(Long codAluno) {
 		this.codAluno = codAluno;
 	}
-	
-	public String getNomeAluno() {
-		return nm_Aluno;
+
+	public String getNome() {
+		return nome;
 	}
-	public void setNomeAluno(String nomeAluno) {
-		this.nm_Aluno = nomeAluno;
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
+
 	public Date getDataNasc() {
-		return dt_Nascimento;
+		return dataNasc;
 	}
+
 	public void setDataNasc(Date dataNasc) {
-		this.dt_Nascimento = dataNasc;
+		this.dataNasc = dataNasc;
 	}
+
 	public String getSexo() {
 		return sexo;
 	}
+
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
+
 	public String getCpf() {
 		return cpf;
 	}
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
 	public String getRg() {
 		return rg;
 	}
+
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-	public char getNacionalidade() {
+
+	public NacionalidadeAlunoEnum getNacionalidade() {
 		return nacionalidade;
 	}
-	public void setNacionalidade(char nacionalidade) {
+
+	public void setNacionalidade(NacionalidadeAlunoEnum nacionalidade) {
 		this.nacionalidade = nacionalidade;
 	}
-	public Long getCodEsc() {
+
+	public Long getCodEscolaridade() {
 		return codEscolaridade;
 	}
-	public void setCodEsc(Long codEsc) {
-		this.codEscolaridade = codEsc;
+
+	public void setCodEscolaridade(Long codEscolaridade) {
+		this.codEscolaridade = codEscolaridade;
 	}
-	public LocalDateTime getDataCadast() {
+
+	public LocalDateTime getDt_Cadastro() {
 		return dt_Cadastro;
 	}
-	public void setDataCadast(LocalDateTime dataCadast) {
-		this.dt_Cadastro = dataCadast;
+
+	public void setDt_Cadastro(LocalDateTime dt_Cadastro) {
+		this.dt_Cadastro = dt_Cadastro;
 	}
+
 	public String getStatus() {
 		return status;
 	}
-	public void setStatus (String status) {
+
+	public void setStatus(String status) {
 		this.status = status;
 	}
-
 }

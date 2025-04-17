@@ -13,7 +13,7 @@ public class RoleModel {
     private Long idRole;
 
     @Column(length = 70)
-    private String nm_role;
+    private String nome;
 
     //aceitar somente A OU I em status
     @Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
@@ -43,8 +43,8 @@ public class RoleModel {
         }
     }
 
-    public void setNm_role(String nm_role) {
-        this.nm_role = nm_role;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Long getIdRole() {
@@ -55,8 +55,8 @@ public class RoleModel {
         this.idRole = idRole;
     }
 
-    public String getNm_role() {
-        return nm_role;
+    public String getNome() {
+        return nome;
     }
 
     public String getStatus() {

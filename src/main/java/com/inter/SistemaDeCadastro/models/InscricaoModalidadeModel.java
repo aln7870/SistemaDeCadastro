@@ -15,7 +15,6 @@ public class InscricaoModalidadeModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codInscricaoModalidade;
 	
 
@@ -39,30 +38,27 @@ public class InscricaoModalidadeModel {
 		this.codInscricaoModalidade = codInscricaoModalidade;
 	}
 
-	public AlunoModel getCodAluno() {
+	public AlunoModel getAluno() {
 		return aluno;
 	}
 
-	public void setCodAluno(AlunoModel aluno) {
+	public void setAluno(AlunoModel aluno) {
 		this.aluno = aluno;
 	}
 
-	public ModalidadeModel getCodModalidade() {
-        return modalidade;
-    }
+	public ModalidadeModel getModalidade() {
+		return modalidade;
+	}
 
-    public void setCodModalidade(ModalidadeModel modalidade) {
-        this.modalidade = modalidade;
-    }
+	public void setModalidade(ModalidadeModel modalidade) {
+		this.modalidade = modalidade;
+	}
 
-	public TurnoModel getCodTurno() {
+	public TurnoModel getTurno() {
 		return turno;
 	}
 
-	public void setCodTurno(TurnoModel turno) {
+	public void setTurno(TurnoModel turno) {
 		this.turno = turno;
 	}
-	
-	
-
 }

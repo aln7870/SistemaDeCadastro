@@ -15,7 +15,6 @@ public class OcupacaoModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codOcupacao;
 	
 	@Column(length = 100, nullable = false)

@@ -17,7 +17,6 @@ public class ContatoModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codContato;
 	
 	@Column(length = 80, nullable = false)
@@ -46,10 +45,6 @@ public class ContatoModel {
             status = "A";
         }
     }
-	
-	public ContatoModel() {
-		
-	}
 
 	public Long getCodContato() {
 		return codContato;
@@ -90,12 +85,12 @@ public class ContatoModel {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public AlunoModel getCodAluno() {
+
+	public AlunoModel getAluno() {
 		return aluno;
 	}
 
-	public void setCodAluno(AlunoModel aluno) {
+	public void setAluno(AlunoModel aluno) {
 		this.aluno = aluno;
 	}
 
@@ -106,5 +101,4 @@ public class ContatoModel {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
 }

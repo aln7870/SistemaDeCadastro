@@ -11,7 +11,6 @@ public class SaudeModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
     private Long codSaude;
 
     @Size(max = 255)

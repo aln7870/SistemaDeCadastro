@@ -31,18 +31,18 @@ public class AdminUserConfig implements CommandLineRunner {
     }
 
     private void createAdminIfNotExist() {
-        Optional<UserModel> userAdmin = userRepository.findByEmail("admin@gmail.com");
+        Optional<UserModel> userAdmin = userRepository.findByNome("admin@gmail.com");
 
         if (userAdmin.isEmpty()) {
             RoleModel roleAdmin = roleRepository.findByNome("ADMIN");
             if (roleAdmin == null) {
                 roleAdmin = new RoleModel();
-                roleAdmin.setNm_role("ADMIN");
+                roleAdmin.setNome("ADMIN");
                 roleRepository.save(roleAdmin);
             }
 
             UserModel admin = new UserModel();
-            admin.setNm_usuario("Adm do Sistema");
+            admin.setNome("Adm do Sistema");
             admin.setSenha(passwordEncoder.encode("7870"));
             admin.setRoles(Set.of(roleAdmin));
             userRepository.save(admin);

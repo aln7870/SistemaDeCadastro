@@ -34,7 +34,7 @@ public class LoginController {
     @PostMapping
     public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
 
-        Optional<UserModel> user = userRepository.findByEmail(loginRequest.nm_usuario());
+        Optional<UserModel> user = userRepository.findByNome(loginRequest.nome());
 
         if (user.isEmpty()) {
             throw new BadCredentialsException("usuario vazio");
@@ -48,7 +48,7 @@ public class LoginController {
         var expiresIn = 1200L;   //20 minutos
         var scope = user.get().getRoles()
                 .stream()
-                .map(RoleModel::getNm_role)
+                .map(RoleModel::getNome)
                 .collect(Collectors.joining());
 
         var claims = JwtClaimsSet.builder()

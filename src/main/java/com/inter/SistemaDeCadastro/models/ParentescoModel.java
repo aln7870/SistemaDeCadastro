@@ -11,7 +11,6 @@ public class ParentescoModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codParentesco;
 	
 	@Column(length = 50, nullable = false)

@@ -2,75 +2,56 @@ package com.inter.SistemaDeCadastro.models;
 
 import java.sql.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
+import com.inter.SistemaDeCadastro.models.enums.NacionalidadeAlunoEnum;
+import com.inter.SistemaDeCadastro.models.enums.StatusFaltaEnum;
+import com.inter.SistemaDeCadastro.models.enums.TipoFaltaEnum;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 
 @Entity
-@Table(name = "Aluno")
+@Table(name = "ControleFalta")
 public class ControleFaltaModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codControleFalta;
 	
-	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'P'")
+	@Column(name = "Falta" ,length = 1, columnDefinition = "CHAR(1) DEFAULT 'P'")
     @Pattern(regexp = "[PF]")
     private String falta = "P";
 	
-	@Column(updatable = false)
+	@Column(name = "DataFalta" ,updatable = false)
     private Date dataFalta;
 	
 	@ManyToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
-	@Column(columnDefinition = "INT UNSIGNED")
+    @JoinColumn(name = "CodUsuario", nullable = false)
 	private UserModel user;
 	
 	@ManyToOne
     @JoinColumn(name = "codInscricaoModalidade", nullable = false)
-	@Column(columnDefinition = "INT UNSIGNEDT")
 	private InscricaoModalidadeModel inscricaoModalidade;
+
+	@Column(name = "StatusFalta", columnDefinition = "ENUM('PENDENTE', 'CONFIRMADO') DEFAULT 'PENDENTE'")
+	@Enumerated(EnumType.STRING)
+	private StatusFaltaEnum statusFalta;
+
+	@Column(name = "TipoFalta", columnDefinition = "ENUM('REFORÇO', 'MODALIDADE')")
+	@Enumerated(EnumType.STRING)
+	private TipoFaltaEnum tipoFalta;
 	
-	public enum tipoFalta {
-		REFORCO,
-		MODALIDADE;
-	}
-	
-	public enum statusFalta{
-		PENDENTE,
-		CONFIRMADO;
-	}
-	
-	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+	@Column(name = "Status", length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
     @Pattern(regexp = "[AI]")
     private String status = "A";
-	
-	//PrePersist aqui
-	@PrePersist
-    public void prePersistFalta() {
-        if (falta == null) {
-            falta = "P";
-        }
-    }
 
-    @PrePersist
-    public void prePersist() {
-        if (status == null) {
-            status = "A";
-        }
-    }
-    
-    public ControleFaltaModel() {
-    	
-    }
+	@PrePersist
+	public void prePersist() {
+		if (falta == null) {
+			falta = "P";
+		}
+		if (status == null) {
+			status = "A";
+		}
+	}
 
 	public Long getCodControleFalta() {
 		return codControleFalta;
@@ -112,6 +93,22 @@ public class ControleFaltaModel {
 		this.inscricaoModalidade = inscricaoModalidade;
 	}
 
+	public StatusFaltaEnum getStatusFalta() {
+		return statusFalta;
+	}
+
+	public void setStatusFalta(StatusFaltaEnum statusFalta) {
+		this.statusFalta = statusFalta;
+	}
+
+	public TipoFaltaEnum getTipoFalta() {
+		return tipoFalta;
+	}
+
+	public void setTipoFalta(TipoFaltaEnum tipoFalta) {
+		this.tipoFalta = tipoFalta;
+	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -119,7 +116,4 @@ public class ControleFaltaModel {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-	
 }

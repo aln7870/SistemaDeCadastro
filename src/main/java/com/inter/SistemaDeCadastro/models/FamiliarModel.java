@@ -19,7 +19,6 @@ public class FamiliarModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(columnDefinition = "INT UNSIGNED AUTO_INCREMENT")
 	private Long codFamiliar;
 	
 	@Column(length = 150, nullable = false)
