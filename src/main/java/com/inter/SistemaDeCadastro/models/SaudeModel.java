@@ -1,6 +1,5 @@
 package com.inter.SistemaDeCadastro.models;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -18,15 +17,15 @@ public class SaudeModel {
     private String descricaoAlergia;
 
     @Size(max = 255)
-    @Column(name = "dascrecaoMedicacao", columnDefinition = "TINYTEXT")
+    @Column(name = "DescricaoMedicacao", columnDefinition = "TINYTEXT")
     private String descricaoMedicacao;
 
     @Size(max = 255)
-    @Column(name = "descricaoProblemaSaude", columnDefinition = "TINYTEXT")
+    @Column(name = "DescricaoProblemaSaude", columnDefinition = "TINYTEXT")
     private String descricaoProblemaSaude;
 
     @Size(max = 255)
-    @Column(name = "tipoDeficiencia", columnDefinition = "TINYTEXT")
+    @Column(name = "TipoDeficiencia", columnDefinition = "TINYTEXT")
     private String tipoDeficiencia;
 
     @Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
@@ -39,17 +38,15 @@ public class SaudeModel {
             status = "A";
         }
     }
-    
-    
+
     public SaudeModel() {
     }
 
-   
     public Long getCodSaude() {
         return codSaude;
     }
 
-    public void setId(Long codSaude) {
+    public void setCodSaude(Long codSaude) {
         this.codSaude = codSaude;
     }
 
@@ -85,14 +82,11 @@ public class SaudeModel {
         this.tipoDeficiencia = tipoDeficiencia;
     }
 
-	public String getStatus() {
-		return status;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-    
-
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
