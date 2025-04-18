@@ -3,6 +3,7 @@ package com.inter.SistemaDeCadastro.models;
 import jakarta.validation.constraints.Pattern;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "INT UNSIGNED",nullable = false)
+    @Column(columnDefinition = "INT UNSIGNED", nullable = false)
     private Long idUsuario;
 
     @Column(length = 80, nullable = false, unique = true)

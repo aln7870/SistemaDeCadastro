@@ -66,10 +66,7 @@ public class FamiliarModel {
             status = "A";
         }
     }
-	
-	public FamiliarModel(){
-		
-	}
+
 
 	public Long getCodFamiliar() {
 		return codFamiliar;
