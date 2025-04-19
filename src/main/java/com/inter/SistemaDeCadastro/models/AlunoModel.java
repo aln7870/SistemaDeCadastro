@@ -39,7 +39,6 @@ public class AlunoModel {
     @Enumerated(EnumType.STRING)
     private NacionalidadeAlunoEnum nacionalidade;
 
-    @Column(nullable = false)
     @OneToOne()
     @JoinColumn(name = "codEscolaridade", referencedColumnName = "codEscolaridade")
     private EscolaridadeModel escolaridadeModel;

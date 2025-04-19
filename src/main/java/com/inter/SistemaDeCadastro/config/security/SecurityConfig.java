@@ -44,7 +44,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.GET,"/admin/**").hasAuthority("SCOPE_ADMIN")
-                        .requestMatchers("/usuario/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/usuario/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/usuario/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/usuario/**").hasAuthority("SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/usuario/**").hasAuthority("SCOPE_ADMIN")
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2
                                 .jwt(Customizer.withDefaults())

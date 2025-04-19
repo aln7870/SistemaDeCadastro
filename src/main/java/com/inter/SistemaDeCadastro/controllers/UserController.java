@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping
+    @PostMapping("/cadastro")
     public ResponseEntity<UserModel> criarUser(@RequestBody @Valid Userdto userdto) {
         UserModel novoUser = userService.criarUser(userdto);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoUser);
@@ -49,6 +49,12 @@ public class UserController {
     public ResponseEntity<Object> updateUser(@PathVariable("idUsuario") Long idUsuario, @RequestBody @Valid Userdto userdto) {
         var userAtualizado = userService.atualizarUser(idUsuario, userdto);
         return ResponseEntity.ok(userAtualizado);
+    }
+
+    @DeleteMapping("/{idUsuario}")
+    public ResponseEntity<Object> deletarUser(@PathVariable("idUsuario") Long idUsuario){
+    UserModel userDeletado = userService.deleteUser(idUsuario);
+    return ResponseEntity.status(HttpStatus.OK).body("Usuário deletado.");
     }
 
 }

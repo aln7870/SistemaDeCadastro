@@ -31,7 +31,7 @@ public class AdminUserConfig implements CommandLineRunner {
     }
 
     private void createAdminIfNotExist() {
-        Optional<UserModel> userAdmin = userRepository.findByNome("admin@gmail.com");
+        Optional<UserModel> userAdmin = userRepository.findByNome("Adm do Sistema");
 
         if (userAdmin.isEmpty()) {
             RoleModel roleAdmin = roleRepository.findByNome("ADMIN");
