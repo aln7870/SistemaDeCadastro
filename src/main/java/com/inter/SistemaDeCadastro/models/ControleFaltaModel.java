@@ -24,8 +24,8 @@ public class ControleFaltaModel {
     private Date dataFalta;
 	
 	@ManyToOne
-    @JoinColumn(name = "CodUsuario", nullable = false)
-	private UserModel user;
+    @JoinColumn(name = "CodAluno", nullable = false)
+	private AlunoModel aluno;
 	
 	@ManyToOne
     @JoinColumn(name = "codInscricaoModalidade", nullable = false)
@@ -35,7 +35,7 @@ public class ControleFaltaModel {
 	@Enumerated(EnumType.STRING)
 	private StatusFaltaEnum statusFalta;
 
-	@Column(name = "TipoFalta", columnDefinition = "ENUM('REFORÇO', 'MODALIDADE')")
+	@Column(name = "TipoFalta", columnDefinition = "ENUM('REFORCO', 'MODALIDADE')")
 	@Enumerated(EnumType.STRING)
 	private TipoFaltaEnum tipoFalta;
 	
@@ -77,14 +77,6 @@ public class ControleFaltaModel {
 		this.dataFalta = dataFalta;
 	}
 
-	public UserModel getUser() {
-		return user;
-	}
-
-	public void setUser(UserModel user) {
-		this.user = user;
-	}
-
 	public InscricaoModalidadeModel getInscricaoModalidade() {
 		return inscricaoModalidade;
 	}
@@ -116,4 +108,13 @@ public class ControleFaltaModel {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public AlunoModel getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(AlunoModel aluno) {
+		this.aluno = aluno;
+	}
 }
+

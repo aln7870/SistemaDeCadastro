@@ -16,7 +16,8 @@ public class UserModel {
     @Column(columnDefinition = "INT UNSIGNED", nullable = false)
     private Long idUsuario;
 
-    @Column(length = 80, nullable = false, unique = true)
+
+    @Column(length = 80, nullable = false, unique = false)
     private String nome;
 
     @Column(nullable = false)

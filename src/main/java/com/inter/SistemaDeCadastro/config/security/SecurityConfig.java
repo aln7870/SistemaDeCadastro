@@ -48,6 +48,69 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,"/usuario/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/usuario/**").hasAuthority("SCOPE_ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/usuario/**").hasAuthority("SCOPE_ADMIN")
+                        // ROTAS DO ALUNO
+                        .requestMatchers(HttpMethod.GET, "/aluno/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/aluno/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/aluno/**").hasAuthority("SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/aluno/**").hasAuthority("SCOPE_ADMIN")
+                        // Rotas para /contato
+                        .requestMatchers(HttpMethod.GET, "/contato/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/contato/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/contato/**").hasAuthority("SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/contato/**").hasAuthority("SCOPE_ADMIN")
+
+                        // Rotas para /controleFalta
+                        .requestMatchers(HttpMethod.GET, "/controleFalta/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/controleFalta/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/controleFalta/**").hasAuthority("SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/controleFalta/**").hasAuthority("SCOPE_ADMIN")
+
+                        // Rotas para /endereco
+                        .requestMatchers(HttpMethod.GET, "/endereco/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/endereco/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/endereco/**").hasAuthority("SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/endereco/**").hasAuthority("SCOPE_ADMIN")
+
+                        // Rotas para /escolaridade
+                        .requestMatchers(HttpMethod.GET, "/escolaridade/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/escolaridade/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/escolaridade/**").hasAuthority("SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/escolaridade/**").hasAuthority("SCOPE_ADMIN")
+
+                        // Rotas para /familiar
+                        .requestMatchers(HttpMethod.GET, "/familiar/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/familiar/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/familiar/**").hasAuthority("SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/familiar/**").hasAuthority("SCOPE_ADMIN")
+
+                        // Rotas para /inscricaoModalidade
+                        .requestMatchers(HttpMethod.GET, "/inscricaoModalidade/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/inscricaoModalidade/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/inscricaoModalidade/**").hasAuthority("SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/inscricaoModalidade/**").hasAuthority("SCOPE_ADMIN")
+
+                        // Rotas para /modalidade
+                        .requestMatchers(HttpMethod.GET, "/modalidade/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/modalidade/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/modalidade/**").hasAuthority("SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/modalidade/**").hasAuthority("SCOPE_ADMIN")
+
+                        // Rotas para /ocupacao
+                        .requestMatchers(HttpMethod.GET, "/ocupacao/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/ocupacao/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/ocupacao/**").hasAuthority("SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/ocupacao/**").hasAuthority("SCOPE_ADMIN")
+
+                        // Rotas para /saude
+                        .requestMatchers(HttpMethod.GET, "/saude/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/saude/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/saude/**").hasAuthority("SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/saude/**").hasAuthority("SCOPE_ADMIN")
+
+                        // Rotas para /turno
+                        .requestMatchers(HttpMethod.GET, "/turno/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/turno/**").hasAnyAuthority("SCOPE_USER", "SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/turno/**").hasAuthority("SCOPE_ADMIN")
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2
                                 .jwt(Customizer.withDefaults())

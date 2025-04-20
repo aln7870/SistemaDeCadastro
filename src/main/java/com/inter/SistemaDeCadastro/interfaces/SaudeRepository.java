@@ -1,7 +1,13 @@
 package com.inter.SistemaDeCadastro.interfaces;
 
+import com.inter.SistemaDeCadastro.models.AlunoModel;
 import com.inter.SistemaDeCadastro.models.SaudeModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-    public interface SaudeRepository extends JpaRepository<SaudeModel,Long> {
+import java.util.List;
+import java.util.Optional;
+
+public interface SaudeRepository extends JpaRepository<SaudeModel,Long> {
+    List<SaudeModel> findByAluno(AlunoModel aluno);
+
 }

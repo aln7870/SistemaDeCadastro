@@ -31,7 +31,6 @@ public class AlunoModel {
     @Column(name = "CPF", length = 14, nullable = false)
     private String cpf;
 
-
     @Column(name = "RG", length = 10, nullable = false)
     private String rg;
 
@@ -39,8 +38,7 @@ public class AlunoModel {
     @Enumerated(EnumType.STRING)
     private NacionalidadeAlunoEnum nacionalidade;
 
-//    @Column(nullable = false)
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name = "codEscolaridade", referencedColumnName = "codEscolaridade")
     private EscolaridadeModel escolaridadeModel;
 
@@ -52,6 +50,10 @@ public class AlunoModel {
     @Pattern(regexp = "[AI]")
     private String status = "A";
 
+    // Novo campo para armazenar o usuário que criou o aluno
+    @Column(name = "created_by")
+    private String createdBy;
+
     @PrePersist
     public void prePersist() {
         if (status == null) {
@@ -59,6 +61,7 @@ public class AlunoModel {
         }
     }
 
+    // Getters e Setters
     public Long getCodAluno() {
         return codAluno;
     }
@@ -115,7 +118,6 @@ public class AlunoModel {
         this.nacionalidade = nacionalidade;
     }
 
-
     public LocalDateTime getDt_Cadastro() {
         return dt_Cadastro;
     }
@@ -138,5 +140,13 @@ public class AlunoModel {
 
     public void setEscolaridadeModel(EscolaridadeModel escolaridadeModel) {
         this.escolaridadeModel = escolaridadeModel;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 }

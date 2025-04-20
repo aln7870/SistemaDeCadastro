@@ -2,15 +2,8 @@ package com.inter.SistemaDeCadastro.models;
 
 import java.sql.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
+import com.inter.SistemaDeCadastro.models.enums.ParentescoEnum;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 
 @Entity
@@ -22,34 +15,21 @@ public class FamiliarModel {
 	private Long codFamiliar;
 	
 	@Column(length = 150, nullable = false)
-	private String nm_Familiar;
+	private String nmFamiliar;
 	
 	@Column(updatable = false)
-    private Date dt_Nascimento;
-	
-	public enum parentesco{
-		PAI,
-		MÃE, 
-		AVÔ, 
-		AVÓ, 
-		TIO, 
-		TIA,
-		IRMÃO,
-		IRMÃ,
-		PADRASTO,
-		MADRASTA,
-		GUARDIÃO_LEGAL,
-		RESPONSÁVEL_LEGAL,
-		TUTOR,
-		CUIDADOR;
-	}
+    private Date dtNascimento;
+
+	@Enumerated(EnumType.STRING)
+	@Column(length = 30, nullable = false)
+	private ParentescoEnum parentesco;
 	
 	@ManyToOne
     @JoinColumn(name = "codAluno", nullable = false)
 	private AlunoModel aluno;
 	
 	@ManyToOne
-    @JoinColumn(name = "codOpcao", nullable = false)
+    @JoinColumn(name = "codOcupacao", nullable = false)
 	private OcupacaoModel ocupacao;
 	
 	@ManyToOne
@@ -76,20 +56,20 @@ public class FamiliarModel {
 		this.codFamiliar = codFamiliar;
 	}
 
-	public String getNm_Familiar() {
-		return nm_Familiar;
+	public String getNmFamiliar() {
+		return nmFamiliar;
 	}
 
-	public void setNm_Familiar(String nm_Familiar) {
-		this.nm_Familiar = nm_Familiar;
+	public void setNmFamiliar(String nm_Familiar) {
+		this.nmFamiliar = nm_Familiar;
 	}
 
-	public Date getDt_Nascimento() {
-		return dt_Nascimento;
+	public Date getDtNascimento() {
+		return dtNascimento;
 	}
 
-	public void setDt_Nascimento(Date dt_Nascimento) {
-		this.dt_Nascimento = dt_Nascimento;
+	public void setDtNascimento(Date dtNascimento) {
+		this.dtNascimento = dtNascimento;
 	}
 
 	public AlunoModel getAluno() {
@@ -123,7 +103,12 @@ public class FamiliarModel {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
 
+	public ParentescoEnum getParentesco() {
+		return parentesco;
+	}
+
+	public void setParentesco(ParentescoEnum parentesco) {
+		this.parentesco = parentesco;
+	}
 }

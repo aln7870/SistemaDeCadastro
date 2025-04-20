@@ -19,5 +19,7 @@ public record FamiliarDto(
 
         @NotNull Long codEscolaridade,
 
+        @NotBlank String parentesco,
+
         @Pattern(regexp = "[AI]") String status
 ) {}

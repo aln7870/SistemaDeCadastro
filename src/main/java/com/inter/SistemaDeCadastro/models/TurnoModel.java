@@ -18,7 +18,7 @@ public class TurnoModel {
 	private Long codTurno;
 	
 	@Column(length = 50, nullable = false)
-	private String nm_Turno;
+	private String nmTurno;
 	
 	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
     @Pattern(regexp = "[AI]")
@@ -40,11 +40,11 @@ public class TurnoModel {
 	}
 
 	public String getNm_Turno() {
-		return nm_Turno;
+		return nmTurno;
 	}
 
 	public void setNm_Turno(String nm_Turno) {
-		this.nm_Turno = nm_Turno;
+		this.nmTurno = nm_Turno;
 	}
 
 	public String getStatus() {

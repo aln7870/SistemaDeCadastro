@@ -13,7 +13,7 @@ public record ControleFaltaDto(
 
         @NotNull Date dataFalta,
 
-        @NotNull Long codUsuario,
+        @NotNull Long codAluno,
 
         @NotNull Long codInscricaoModalidade,
 

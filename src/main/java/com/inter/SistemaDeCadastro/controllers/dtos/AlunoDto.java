@@ -19,4 +19,4 @@ public record AlunoDto(
         @NotNull Long codEscolaridade,
         LocalDateTime dtCadastro,
         @Pattern(regexp = "[AI]") String status
-) {}
+        ) {}

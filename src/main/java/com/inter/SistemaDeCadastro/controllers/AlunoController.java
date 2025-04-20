@@ -7,21 +7,31 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/alunos")
+@RequestMapping("/aluno")
 public class AlunoController {
 
     @Autowired
     private AlunoService alunoService;
 
+    // Método para obter o nome do usuário logado (usando Spring Security)
+    private String getLoggedInUser() {
+        return SecurityContextHolder.getContext().getAuthentication().getName(); // Retorna o nome do usuário logado
+    }
+
     @PostMapping
     public ResponseEntity<AlunoModel> criarAluno(@RequestBody @Valid AlunoDto alunoDto) {
-        AlunoModel novoAluno = alunoService.criarAluno(alunoDto);
+        // Obter o nome do usuário logado
+        String createdBy = getLoggedInUser();
+
+        // Passar o nome do usuário para o serviço
+        AlunoModel novoAluno = alunoService.criarAluno(alunoDto, createdBy);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoAluno);
     }
 
@@ -45,7 +55,11 @@ public class AlunoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> atualizarAluno(@PathVariable Long id, @RequestBody @Valid AlunoDto alunoDto) {
-        AlunoModel alunoAtualizado = alunoService.atualizarAluno(id, alunoDto);
+        // Obter o nome do usuário logado
+        String createdBy = getLoggedInUser();
+
+        // Passar o nome do usuário para o serviço para atualizar o aluno
+        AlunoModel alunoAtualizado = alunoService.atualizarAluno(id, alunoDto, createdBy);
         return ResponseEntity.ok(alunoAtualizado);
     }
 }

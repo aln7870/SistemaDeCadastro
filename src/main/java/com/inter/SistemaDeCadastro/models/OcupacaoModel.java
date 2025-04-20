@@ -18,7 +18,7 @@ public class OcupacaoModel {
 	private Long codOcupacao;
 	
 	@Column(length = 100, nullable = false)
-	private String nm_Modalidade;
+	private String nmModalidade;
 	
 	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
     @Pattern(regexp = "[AI]")
@@ -44,11 +44,11 @@ public class OcupacaoModel {
 	}
 
 	public String getNm_Modalidade() {
-		return nm_Modalidade;
+		return nmModalidade;
 	}
 
 	public void setNm_Modalidade(String nm_Modalidade) {
-		this.nm_Modalidade = nm_Modalidade;
+		this.nmModalidade = nm_Modalidade;
 	}
 
 	public String getStatus() {

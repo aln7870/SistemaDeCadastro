@@ -1,5 +1,6 @@
 package com.inter.SistemaDeCadastro.controllers.dtos;
 
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
@@ -14,5 +15,7 @@ public record SaudeDto(
 
         @Size(max = 255) String tipoDeficiencia,
 
-        @Pattern(regexp = "[AI]") String status
+        @Pattern(regexp = "[AI]") String status,
+
+        @NotNull Long codAluno
 ) {}

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/controle-faltas")
+@RequestMapping("/controleFalta")
 public class ControleFaltaController {
 
     @Autowired

@@ -8,4 +8,6 @@ import java.util.Optional;
 
 public interface AlunoRepository extends JpaRepository <AlunoModel,Long> {
     Optional<AlunoModel> findByNome(String nome);
+    boolean existsByCpf(String cpf);
+    boolean existsByRg(String rg);
 }

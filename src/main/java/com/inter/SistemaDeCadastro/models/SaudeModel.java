@@ -12,6 +12,10 @@ public class SaudeModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codSaude;
 
+    @ManyToOne
+    @JoinColumn(name = "codAluno", nullable = false)
+    private AlunoModel aluno;
+
     @Size(max = 255)
     @Column(name = "DescricaoAlergia", columnDefinition = "TINYTEXT")
     private String descricaoAlergia;
@@ -40,6 +44,14 @@ public class SaudeModel {
     }
 
     public SaudeModel() {
+    }
+
+    public AlunoModel getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(AlunoModel aluno) {
+        this.aluno = aluno;
     }
 
     public Long getCodSaude() {
