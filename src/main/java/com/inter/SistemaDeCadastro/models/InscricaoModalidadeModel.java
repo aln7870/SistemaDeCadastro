@@ -1,40 +1,53 @@
 package com.inter.SistemaDeCadastro.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "InscricaoModalidade")
 public class InscricaoModalidadeModel {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codInscricaoModalidade;
-	
+	@Column(name = "CodInscricaoModalidade")
+	private Integer codInscricaoModalidade;
 
 	@ManyToOne
-    @JoinColumn(name = "codAluno", nullable = false)
+    @JoinColumn(name = "CodAluno", nullable = false)
 	private AlunoModel aluno;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "codModalidade", nullable = false)
+    @JoinColumn(name = "CodModalidade", nullable = false)
     private ModalidadeModel modalidade;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "codTurno", nullable = false)
+    @JoinColumn(name = "CodTurno", nullable = false)
 	private TurnoModel turno;
 
-	public Long getCodInscricaoModalidade() {
+	@Column(name = "Status",length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+	@Pattern(regexp = "[AI]")
+	private String status;
+
+	@PrePersist
+	public void prePersist() {
+		if (status == null) {
+			status = "A";
+		}
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Integer getCodInscricaoModalidade() {
 		return codInscricaoModalidade;
 	}
 
-	public void setCodInscricaoModalidade(Long codInscricaoModalidade) {
+	public void setCodInscricaoModalidade(Integer codInscricaoModalidade) {
 		this.codInscricaoModalidade = codInscricaoModalidade;
 	}
 

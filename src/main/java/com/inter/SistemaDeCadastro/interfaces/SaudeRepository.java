@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface SaudeRepository extends JpaRepository<SaudeModel,Long> {
+public interface SaudeRepository extends JpaRepository<SaudeModel,Integer> {
     List<SaudeModel> findByAluno(AlunoModel aluno);
 
 }

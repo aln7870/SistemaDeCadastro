@@ -52,11 +52,11 @@ public class InscricaoModalidadeService {
         return inscricaoModalidadeRepository.findAll();
     }
 
-    public Optional<InscricaoModalidadeModel> buscarPorId(Long id) {
+    public Optional<InscricaoModalidadeModel> buscarPorId(Integer id) {
         return inscricaoModalidadeRepository.findById(id);
     }
 
-    public void deletar(Long id) {
+    public void deletar(Integer id) {
         inscricaoModalidadeRepository.deleteById(id);
     }
 }

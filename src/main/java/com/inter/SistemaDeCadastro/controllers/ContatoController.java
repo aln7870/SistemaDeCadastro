@@ -33,14 +33,14 @@ public class ContatoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<Object> buscarPorId(@PathVariable Integer id) {
         return contatoService.buscarPorId(id)
                 .<ResponseEntity<Object>>map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(404).body("Contato não encontrado."));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> atualizarContato(@PathVariable Long id, @RequestBody @Valid ContatoDto dto) {
+    public ResponseEntity<Object> atualizarContato(@PathVariable Integer id, @RequestBody @Valid ContatoDto dto) {
         ContatoModel atualizado = contatoService.atualizarContato(id, dto);
         return ResponseEntity.ok(atualizado);
     }

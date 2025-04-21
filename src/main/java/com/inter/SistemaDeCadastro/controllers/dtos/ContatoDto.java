@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 public record ContatoDto(
-        Long codContato,
 
         @NotBlank String responsavelEmergencial,
 
@@ -14,9 +13,9 @@ public record ContatoDto(
 
         @NotBlank String telefoneEmergencial,
 
-        @NotBlank @Email String email,
+        @NotBlank String email,
 
-        @NotNull Long codAluno,
+        @NotNull Integer codAluno,
 
-        @Pattern(regexp = "[AI]") String status
+        String status
 ) {}

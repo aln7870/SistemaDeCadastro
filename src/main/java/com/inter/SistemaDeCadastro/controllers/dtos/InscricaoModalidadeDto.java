@@ -3,11 +3,9 @@ package com.inter.SistemaDeCadastro.controllers.dtos;
 import jakarta.validation.constraints.NotNull;
 
 public record InscricaoModalidadeDto(
-        Long codInscricaoModalidade,
+        @NotNull Integer codAluno,
 
-        @NotNull Long codAluno,
+        @NotNull Integer codModalidade,
 
-        @NotNull Long codModalidade,
-
-        @NotNull Long codTurno
+        @NotNull Integer codTurno
 ) {}

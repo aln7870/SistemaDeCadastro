@@ -6,7 +6,10 @@ import com.inter.SistemaDeCadastro.models.EnderecoModel;
 import com.inter.SistemaDeCadastro.interfaces.AlunoRepository;
 import com.inter.SistemaDeCadastro.interfaces.EnderecoRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,18 +25,11 @@ public class EnderecoService {
 
     public EnderecoModel salvar(EnderecoDto dto) {
         AlunoModel aluno = alunoRepository.findById(dto.codAluno())
-                .orElseThrow(() -> new EntityNotFoundException("Aluno não encontrado"));
+                .orElseThrow(() -> new EntityNotFoundException("Aluno não encontrado com ID: " + dto.codAluno()));
 
         EnderecoModel endereco = new EnderecoModel();
-        endereco.setCep(dto.cep());
-        endereco.setRua(dto.rua());
-        endereco.setBairro(dto.bairro());
-        endereco.setCidade(dto.cidade());
-        endereco.setNumero(dto.numero());
-        endereco.setResideCom(dto.resideCom());
-        endereco.setOutroResideCom(dto.outroResideCom());
-        endereco.setCodAluno(aluno);
-        endereco.setStatus(dto.status());
+        BeanUtils.copyProperties(dto, endereco);
+         endereco.setAluno(aluno);
 
         return enderecoRepository.save(endereco);
     }
@@ -42,12 +38,12 @@ public class EnderecoService {
         return enderecoRepository.findAll();
     }
 
-    public EnderecoModel buscarPorId(Long id) {
+    public EnderecoModel buscarPorId(Integer id) {
         return enderecoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Endereço não encontrado"));
     }
 
-    public EnderecoModel atualizar(Long id, EnderecoDto dto) {
+    public EnderecoModel atualizar(Integer id, EnderecoDto dto) {
         EnderecoModel endereco = buscarPorId(id);
 
         endereco.setCep(dto.cep());
@@ -62,7 +58,7 @@ public class EnderecoService {
         return enderecoRepository.save(endereco);
     }
 
-    public void deletar(Long id) {
+    public void deletar(Integer id) {
         EnderecoModel endereco = buscarPorId(id);
         enderecoRepository.delete(endereco);
     }

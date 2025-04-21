@@ -30,13 +30,13 @@ public class ControleFaltaService {
         return controleFaltaRepository.findAll();
     }
 
-    public Optional<ControleFaltaModel> buscarPorId(Long id) {
+    public Optional<ControleFaltaModel> buscarPorId(Integer id) {
         return controleFaltaRepository.findById(id);
     }
 
     public ControleFaltaModel criar(ControleFaltaDto dto) {
         ControleFaltaModel model = new ControleFaltaModel();
-        BeanUtils.copyProperties(dto, model, "aluno", "inscricaoModalidade"); // Alterado para aluno
+        BeanUtils.copyProperties(dto, model, "aluno", "inscricaoModalidade");// Alterado para aluno
 
         AlunoModel aluno = alunoRepository.findById(dto.codAluno()) // Alterado para buscar por Aluno
                 .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
@@ -44,13 +44,13 @@ public class ControleFaltaService {
         InscricaoModalidadeModel inscricao = inscricaoModalidadeRepository.findById(dto.codInscricaoModalidade())
                 .orElseThrow(() -> new RuntimeException("Inscrição de modalidade não encontrada"));
 
-        model.setAluno(aluno); // Alterado para setar AlunoModel
+        // model.setAluno(aluno); // Alterado para setar AlunoModel
         model.setInscricaoModalidade(inscricao);
 
         return controleFaltaRepository.save(model);
     }
 
-    public ControleFaltaModel atualizar(Long id, ControleFaltaDto dto) {
+    public ControleFaltaModel atualizar(Integer id, ControleFaltaDto dto) {
         ControleFaltaModel model = controleFaltaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Controle de falta não encontrado"));
 
@@ -62,7 +62,7 @@ public class ControleFaltaService {
         InscricaoModalidadeModel inscricao = inscricaoModalidadeRepository.findById(dto.codInscricaoModalidade())
                 .orElseThrow(() -> new RuntimeException("Inscrição de modalidade não encontrada"));
 
-        model.setAluno(aluno); // Alterado para setar AlunoModel
+        // model.setAluno(aluno); // Alterado para setar AlunoModel
         model.setInscricaoModalidade(inscricao);
 
         return controleFaltaRepository.save(model);

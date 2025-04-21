@@ -16,8 +16,7 @@ public class TurnoService {
 
     public TurnoModel save(TurnoDto dto) {
         TurnoModel model = new TurnoModel();
-        model.setNm_Turno(dto.nmTurno());
-        model.setStatus(dto.status() != null ? dto.status() : "A");
+        model.setNome(dto.nome());
         return repository.save(model);
     }
 
@@ -25,21 +24,21 @@ public class TurnoService {
         return repository.findAll();
     }
 
-    public TurnoModel findById(Long id) {
+    public TurnoModel findById(Integer id) {
         return repository.findById(id).orElse(null);
     }
 
-    public TurnoModel update(Long id, TurnoDto dto) {
+    public TurnoModel update(Integer id, TurnoDto dto) {
         TurnoModel model = repository.findById(id).orElse(null);
         if (model != null) {
-            model.setNm_Turno(dto.nmTurno());
+            model.setNome(dto.nome());
             model.setStatus(dto.status());
             return repository.save(model);
         }
         return null;
     }
 
-    public void delete(Long id) {
+    public void delete(Integer id) {
         repository.deleteById(id);
     }
 }

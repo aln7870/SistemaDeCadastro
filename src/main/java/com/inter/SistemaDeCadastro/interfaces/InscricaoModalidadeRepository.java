@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface InscricaoModalidadeRepository extends JpaRepository<InscricaoModalidadeModel,Long> {
+public interface InscricaoModalidadeRepository extends JpaRepository<InscricaoModalidadeModel,Integer> {
 
-    List<InscricaoModalidadeModel> findByAlunoCodAluno(Long codAluno);
-    List<InscricaoModalidadeModel> findByModalidadeCodModalidade(Long codModalidade);
-    List<InscricaoModalidadeModel> findByTurnoCodTurno(Long codTurno);
+    List<InscricaoModalidadeModel> findByAlunoCodAluno(Integer codAluno);
+    List<InscricaoModalidadeModel> findByModalidadeCodModalidade(Integer codModalidade);
+    List<InscricaoModalidadeModel> findByTurnoCodTurno(Integer codTurno);
 }

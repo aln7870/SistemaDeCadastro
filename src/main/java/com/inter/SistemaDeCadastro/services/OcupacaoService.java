@@ -17,7 +17,7 @@ public class OcupacaoService {
 
     public OcupacaoModel criar(OcupacaoDto dto) {
         OcupacaoModel ocupacao = new OcupacaoModel();
-        ocupacao.setNm_Modalidade(dto.nmModalidade());
+        ocupacao.setNome(dto.nmModalidade());
         ocupacao.setStatus(dto.status());
         return ocupacaoRepository.save(ocupacao);
     }
@@ -26,21 +26,21 @@ public class OcupacaoService {
         return ocupacaoRepository.findAll();
     }
 
-    public Optional<OcupacaoModel> buscarPorId(Long id) {
+    public Optional<OcupacaoModel> buscarPorId(Integer id) {
         return ocupacaoRepository.findById(id);
     }
 
-    public OcupacaoModel atualizar(Long id, OcupacaoDto dto) {
+    public OcupacaoModel atualizar(Integer id, OcupacaoDto dto) {
         return ocupacaoRepository.findById(id)
                 .map(o -> {
-                    o.setNm_Modalidade(dto.nmModalidade());
+                    o.setNome(dto.nmModalidade());
                     o.setStatus(dto.status());
                     return ocupacaoRepository.save(o);
                 })
                 .orElseThrow(() -> new RuntimeException("Ocupação não encontrada"));
     }
 
-    public void deletar(Long id) {
+    public void deletar(Integer id) {
         ocupacaoRepository.deleteById(id);
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ModalidadeRepository extends JpaRepository<ModalidadeModel,Long> {
+public interface ModalidadeRepository extends JpaRepository<ModalidadeModel,Integer> {
     List<ModalidadeModel>findByStatus(String status);
 
 }

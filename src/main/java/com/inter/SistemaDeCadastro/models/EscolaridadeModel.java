@@ -15,12 +15,13 @@ public class EscolaridadeModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codEscolaridade;
+	@Column(name = "CodEscolaridade")
+	private Integer codEscolaridade;
 	
-	@Column(length = 100, nullable = false)
+	@Column(name = "Nm_Escolaridade",length = 100, nullable = false)
 	private String nome;
 	
-	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+	@Column(name = "Status",length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
     @Pattern(regexp = "[AI]")
     private String status = "A";
 
@@ -34,11 +35,11 @@ public class EscolaridadeModel {
 	public EscolaridadeModel() {
 	}
 
-	public Long getCodEscolaridade() {
+	public Integer getCodEscolaridade() {
 		return codEscolaridade;
 	}
 
-	public void setCodEscolaridade(Long codEscolaridade) {
+	public void setCodEscolaridade(Integer codEscolaridade) {
 		this.codEscolaridade = codEscolaridade;
 	}
 

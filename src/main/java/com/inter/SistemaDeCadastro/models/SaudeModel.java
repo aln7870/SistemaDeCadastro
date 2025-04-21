@@ -10,29 +10,30 @@ public class SaudeModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codSaude;
+    @Column(name = "CodSaude")
+    private Integer codSaude;
 
     @ManyToOne
-    @JoinColumn(name = "codAluno", nullable = false)
+    @JoinColumn(name = "CodAluno", nullable = false)
     private AlunoModel aluno;
 
-    @Size(max = 255)
+
     @Column(name = "DescricaoAlergia", columnDefinition = "TINYTEXT")
     private String descricaoAlergia;
 
-    @Size(max = 255)
+
     @Column(name = "DescricaoMedicacao", columnDefinition = "TINYTEXT")
     private String descricaoMedicacao;
 
-    @Size(max = 255)
+
     @Column(name = "DescricaoProblemaSaude", columnDefinition = "TINYTEXT")
     private String descricaoProblemaSaude;
 
-    @Size(max = 255)
+
     @Column(name = "TipoDeficiencia", columnDefinition = "TINYTEXT")
     private String tipoDeficiencia;
 
-    @Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+    @Column(name = "Status",length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
     @Pattern(regexp = "[AI]")
     private String status = "A";
 
@@ -54,11 +55,11 @@ public class SaudeModel {
         this.aluno = aluno;
     }
 
-    public Long getCodSaude() {
+    public Integer getCodSaude() {
         return codSaude;
     }
 
-    public void setCodSaude(Long codSaude) {
+    public void setCodSaude(Integer codSaude) {
         this.codSaude = codSaude;
     }
 

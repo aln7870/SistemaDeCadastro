@@ -46,9 +46,9 @@ public class LoginController {
 
         var now = Instant.now(); // horario atual
         var expiresIn = 1200L;   //20 minutos
-        var scope = user.get().getRoles()
+        var scope = user.get().getUsuarioRoles()
                 .stream()
-                .map(RoleModel::getNome)
+                .map(usuarioRoleModel -> usuarioRoleModel.getRole().getNome())
                 .collect(Collectors.joining());
 
         var claims = JwtClaimsSet.builder()

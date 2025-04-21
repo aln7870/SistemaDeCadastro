@@ -1,10 +1,13 @@
 package com.inter.SistemaDeCadastro.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.validation.constraints.Pattern;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,22 +16,21 @@ public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "INT UNSIGNED", nullable = false)
-    private Long idUsuario;
+    @Column(name = "CodUsuario",columnDefinition = "INT UNSIGNED", nullable = false)
+    private Integer idUsuario;
 
-
-    @Column(length = 80, nullable = false, unique = false)
+    @Column(name = "Nm_Usuario",length = 80, nullable = false, unique = true)
     private String nome;
 
     @Column(nullable = false)
     private String senha;
 
-    @Column(updatable = false)
+    @Column(name = "Dt_Cadastro",updatable = false)
     @CreationTimestamp
     private LocalDateTime dataCadastro;
 
     //testando para o spring aceitar somente A OU I em status
-    @Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+    @Column(name = "Status",length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
     @Pattern(regexp = "[AI]")
     private String status = "A";
 
@@ -40,21 +42,22 @@ public class UserModel {
         }
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "usuarios_roles",
-            joinColumns = @JoinColumn(name = "idUsuario"),
-            inverseJoinColumns = @JoinColumn(name = "idRole")
-    )
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UsuarioRoleModel> usuarioRoles= new HashSet<>();
 
+    public Set<UsuarioRoleModel> getUsuarioRoles() {
+        return usuarioRoles;
+    }
 
-    private Set<RoleModel> roles;
+    public void setUsuarioRoles(Set<UsuarioRoleModel> usuarioRoles) {
+        this.usuarioRoles = usuarioRoles;
+    }
 
-    public Long getIdUsuario() {
+    public Integer getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -90,11 +93,5 @@ public class UserModel {
         this.status = status;
     }
 
-    public Set<RoleModel> getRoles() {
-        return roles;
-    }
 
-    public void setRoles(Set<RoleModel> roles) {
-        this.roles = roles;
-    }
 }

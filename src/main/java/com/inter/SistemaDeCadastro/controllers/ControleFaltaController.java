@@ -22,7 +22,7 @@ public class ControleFaltaController {
     }
 
     @GetMapping("/{id}")
-    public ControleFaltaModel buscarPorId(@PathVariable Long id) {
+    public ControleFaltaModel buscarPorId(@PathVariable Integer id) {
         return controleFaltaService.buscarPorId(id)
                 .orElseThrow(() -> new RuntimeException("Controle de falta não encontrado"));
     }
@@ -33,7 +33,7 @@ public class ControleFaltaController {
     }
 
     @PutMapping("/{id}")
-    public ControleFaltaModel atualizar(@PathVariable Long id, @RequestBody @Valid ControleFaltaDto dto) {
+    public ControleFaltaModel atualizar(@PathVariable Integer id, @RequestBody @Valid ControleFaltaDto dto) {
         return controleFaltaService.atualizar(id, dto);
     }
 }

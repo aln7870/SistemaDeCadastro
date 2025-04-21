@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface EscolaridadeRepository extends JpaRepository<EscolaridadeModel,Long> {
+public interface EscolaridadeRepository extends JpaRepository<EscolaridadeModel,Integer> {
     // Buscar por nome da escolaridade
     Optional<EscolaridadeModel> findByNome(String nome);
 

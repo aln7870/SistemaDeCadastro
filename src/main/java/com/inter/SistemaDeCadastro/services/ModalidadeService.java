@@ -26,11 +26,11 @@ public class ModalidadeService {
         return modalidadeRepository.findAll();
     }
 
-    public Optional<ModalidadeModel> buscarPorId(Long id) {
+    public Optional<ModalidadeModel> buscarPorId(Integer id) {
         return modalidadeRepository.findById(id);
     }
 
-    public ModalidadeModel atualizar(Long id, ModalidadeDto dto) {
+    public ModalidadeModel atualizar(Integer id, ModalidadeDto dto) {
         return modalidadeRepository.findById(id)
                 .map(m -> {
                     m.setNm_Modalidade(dto.nmModalidade());
@@ -40,7 +40,7 @@ public class ModalidadeService {
                 .orElseThrow(() -> new RuntimeException("Modalidade não encontrada"));
     }
 
-    public void deletar(Long id) {
+    public void deletar(Integer id) {
         modalidadeRepository.deleteById(id);
     }
 }

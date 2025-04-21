@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface EnderecoRepository extends JpaRepository<EnderecoModel,Long> {
-    List<EnderecoModel> findByAlunoCodAluno(Long codAluno);
+public interface EnderecoRepository extends JpaRepository<EnderecoModel,Integer> {
+    List<EnderecoModel> findByAlunoCodAluno(Integer codAluno);
 
 }

@@ -15,12 +15,13 @@ public class ModalidadeModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codModalidade;
+	@Column(name = "CodModalidade")
+	private Integer codModalidade;
 	
-	@Column(length = 50, nullable = false)
-	private String nmModalidade;
+	@Column(name = "Nm_Modalidade",length = 50, nullable = false)
+	private String nome;
 	
-	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+	@Column(name = "Status",length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
     @Pattern(regexp = "[AI]")
     private String status = "A";
 
@@ -34,20 +35,20 @@ public class ModalidadeModel {
 	public ModalidadeModel() {
     }
 
-	public Long getCodModalidade() {
+	public Integer getCodModalidade() {
 		return codModalidade;
 	}
 
-	public void setCodModalidade(Long codModalidade) {
+	public void setCodModalidade(Integer codModalidade) {
 		this.codModalidade = codModalidade;
 	}
 
 	public String getNm_Modalidade() {
-		return nmModalidade;
+		return nome;
 	}
 
 	public void setNm_Modalidade(String nm_Modalidade) {
-		this.nmModalidade = nm_Modalidade;
+		this.nome = nm_Modalidade;
 	}
 
 	public String getStatus() {

@@ -26,13 +26,13 @@ public class InscricaoModalidadeController {
     }
 
     @GetMapping("/{id}")
-    public InscricaoModalidadeModel buscarPorId(@PathVariable Long id) {
+    public InscricaoModalidadeModel buscarPorId(@PathVariable Integer id) {
         return service.buscarPorId(id)
                 .orElseThrow(() -> new RuntimeException("Inscrição não encontrada"));
     }
 
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id) {
+    public void deletar(@PathVariable Integer id) {
         service.deletar(id);
     }
 }

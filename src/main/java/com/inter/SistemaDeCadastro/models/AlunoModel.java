@@ -16,7 +16,8 @@ public class AlunoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codAluno;
+    @Column(name = "CodAluno")
+    private Integer codAluno;
 
     @Column(name = "Nm_Aluno", length = 150, nullable = false)
     private String nome;
@@ -39,20 +40,25 @@ public class AlunoModel {
     private NacionalidadeAlunoEnum nacionalidade;
 
     @ManyToOne()
-    @JoinColumn(name = "codEscolaridade", referencedColumnName = "codEscolaridade")
+    @JoinColumn(name = "CodEscolaridade", referencedColumnName = "codEscolaridade")
     private EscolaridadeModel escolaridadeModel;
 
-    @Column(updatable = false)
+    @Column(name = "Dt_Cadastro",updatable = false)
     @CreationTimestamp
     private LocalDateTime dt_Cadastro;
 
-    @Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+    @Column(name = "Status",length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
     @Pattern(regexp = "[AI]")
     private String status = "A";
 
     // Novo campo para armazenar o usuário que criou o aluno
-    @Column(name = "created_by")
-    private String createdBy;
+    @ManyToOne()
+    @JoinColumn(
+            name = "CodUsuario", // Nome da coluna de chave estrangeira na tabela 'Aluno'
+            referencedColumnName = "CodUsuario", // Nome da coluna de ID na tabela 'User' (AJUSTE SE NECESSÁRIO)
+            nullable = false // Garante que um aluno sempre terá um criador associado
+    )
+    private UserModel codUsuario;
 
     @PrePersist
     public void prePersist() {
@@ -62,11 +68,11 @@ public class AlunoModel {
     }
 
     // Getters e Setters
-    public Long getCodAluno() {
+    public Integer getCodAluno() {
         return codAluno;
     }
 
-    public void setCodAluno(Long codAluno) {
+    public void setCodAluno(Integer codAluno) {
         this.codAluno = codAluno;
     }
 
@@ -142,11 +148,11 @@ public class AlunoModel {
         this.escolaridadeModel = escolaridadeModel;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
+    public UserModel getCodUsuario() {
+        return codUsuario;
     }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+    public void setCodUsuario(UserModel codUsuario) {
+        this.codUsuario = codUsuario;
     }
 }

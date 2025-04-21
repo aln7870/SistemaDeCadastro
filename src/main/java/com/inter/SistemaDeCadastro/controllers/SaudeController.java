@@ -29,7 +29,7 @@ public class SaudeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SaudeModel> getById(@PathVariable Long id) {
+    public ResponseEntity<SaudeModel> getById(@PathVariable Integer id) {
         SaudeModel saudeModel = service.findById(id);
         if (saudeModel != null) {
             return ResponseEntity.ok(saudeModel);  // Retorna 200 OK com o modelo encontrado
@@ -39,7 +39,7 @@ public class SaudeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SaudeModel> update(@PathVariable Long id, @RequestBody SaudeDto dto) {
+    public ResponseEntity<SaudeModel> update(@PathVariable Integer id, @RequestBody SaudeDto dto) {
         SaudeModel updatedSaudeModel = service.update(id, dto);
         if (updatedSaudeModel != null) {
             return ResponseEntity.ok(updatedSaudeModel);  // Retorna 200 OK com o modelo atualizado
@@ -49,7 +49,7 @@ public class SaudeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
         SaudeModel saudeModel = service.findById(id);
         if (saudeModel != null) {
             service.delete(id);

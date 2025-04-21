@@ -2,8 +2,10 @@ package com.inter.SistemaDeCadastro.config.security;
 
 import com.inter.SistemaDeCadastro.interfaces.RoleRepository;
 import com.inter.SistemaDeCadastro.interfaces.UserRepository;
+import com.inter.SistemaDeCadastro.interfaces.UsuarioRoleRepository;
 import com.inter.SistemaDeCadastro.models.RoleModel;
 import com.inter.SistemaDeCadastro.models.UserModel;
+import com.inter.SistemaDeCadastro.models.UsuarioRoleModel;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,6 +25,9 @@ public class AdminUserConfig implements CommandLineRunner {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    UsuarioRoleRepository usuarioRoleRepository;
 
     @Override
     @Transactional
@@ -44,8 +49,14 @@ public class AdminUserConfig implements CommandLineRunner {
             UserModel admin = new UserModel();
             admin.setNome("Adm do Sistema");
             admin.setSenha(passwordEncoder.encode("7870"));
-            admin.setRoles(Set.of(roleAdmin));
             userRepository.save(admin);
+
+            UsuarioRoleModel vinculo = new UsuarioRoleModel();
+            vinculo.setUser(admin);
+            vinculo.setRole(roleAdmin);
+
+            usuarioRoleRepository.save(vinculo);
+
             System.out.println("ADMIN do sistema criado.");
         } else {
             System.out.println("ADMIN já existe no sistema");

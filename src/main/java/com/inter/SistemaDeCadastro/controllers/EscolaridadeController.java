@@ -33,14 +33,14 @@ public class EscolaridadeController {
 
     // Endpoint para buscar escolaridade por ID
     @GetMapping("/{id}")
-    public ResponseEntity<EscolaridadeDto> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<EscolaridadeDto> buscarPorId(@PathVariable Integer id) {
         Optional<EscolaridadeDto> escolaridadeDto = escolaridadeService.buscarPorId(id);
         return escolaridadeDto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // Endpoint para atualizar uma escolaridade
     @PutMapping("/{id}")
-    public ResponseEntity<EscolaridadeDto> atualizar(@PathVariable Long id, @RequestBody EscolaridadeDto escolaridadeDto) {
+    public ResponseEntity<EscolaridadeDto> atualizar(@PathVariable Integer id, @RequestBody EscolaridadeDto escolaridadeDto) {
         try {
             EscolaridadeDto escolaridadeAtualizada = escolaridadeService.atualizar(id, escolaridadeDto);
             return new ResponseEntity<>(escolaridadeAtualizada, HttpStatus.OK);
@@ -51,7 +51,7 @@ public class EscolaridadeController {
 
     // Endpoint para deletar uma escolaridade
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
         try {
             escolaridadeService.deletar(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

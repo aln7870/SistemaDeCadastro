@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/{idUsuario}")
-    public ResponseEntity<Object> getUserById(@PathVariable("idUsuario") Long idUsuario) {
+    public ResponseEntity<Object> getUserById(@PathVariable("idUsuario") Integer idUsuario) {
         Optional<UserModel> user = userService.buscarUserPorId(idUsuario);
 
         if (user.isEmpty()) {
@@ -46,13 +46,13 @@ public class UserController {
     }
 
     @PutMapping("/{idUsuario}")
-    public ResponseEntity<Object> updateUser(@PathVariable("idUsuario") Long idUsuario, @RequestBody @Valid Userdto userdto) {
+    public ResponseEntity<Object> updateUser(@PathVariable("idUsuario") Integer idUsuario, @RequestBody @Valid Userdto userdto) {
         var userAtualizado = userService.atualizarUser(idUsuario, userdto);
         return ResponseEntity.ok(userAtualizado);
     }
 
     @DeleteMapping("/{idUsuario}")
-    public ResponseEntity<Object> deletarUser(@PathVariable("idUsuario") Long idUsuario){
+    public ResponseEntity<Object> deletarUser(@PathVariable("idUsuario") Integer idUsuario){
     UserModel userDeletado = userService.deleteUser(idUsuario);
     return ResponseEntity.status(HttpStatus.OK).body("Usuário deletado.");
     }

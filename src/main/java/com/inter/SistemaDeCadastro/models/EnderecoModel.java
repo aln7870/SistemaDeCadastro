@@ -1,9 +1,5 @@
 package com.inter.SistemaDeCadastro.models;
 
-import java.sql.Date;
-
-import org.hibernate.annotations.CreationTimestamp;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,34 +17,35 @@ public class EnderecoModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codEndereco;
+	@Column(name = "CodEndereco")
+	private Integer codEndereco;
 	
-	@Column(length = 10, nullable = false)
+	@Column(name = "CEP",length = 10)
 	private String cep;
 	
-	@Column(length = 60, nullable = false)
+	@Column(name = "Rua",length = 60, nullable = false)
 	private String rua;
 	
-	@Column(length = 100, nullable = false)
+	@Column(name = "Bairro",length = 100, nullable = false)
 	private String bairro;
 	
-	@Column(length = 70, nullable = false)
+	@Column(name = "Cidade",length = 70, nullable = false)
 	private String cidade;
 	
-	@Column(nullable = false)
-	private short numero;
+	@Column(name = "Numero", columnDefinition = "SMALLINT")
+	private Short numero;
 	
-	@Column(length = 40, nullable = false)
+	@Column(name = "ResideCom",length = 40, nullable = false)
 	private String resideCom;
 	
-	@Column(length = 40, nullable = false)
+	@Column(name = "OutroResideCom",length = 40)
 	private String outroResideCom;
 	
 	@ManyToOne
-    @JoinColumn(name = "codAluno", nullable = false)
+    @JoinColumn(name = "CodAluno", nullable = false)
 	private AlunoModel aluno;
 	
-	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+	@Column(name = "Status",length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
     @Pattern(regexp = "[AI]")
     private String status = "A";
 
@@ -58,16 +55,12 @@ public class EnderecoModel {
             status = "A";
         }
     }
-	
-	public EnderecoModel() {
-		
-	}
 
-	public Long getCodEndereco() {
+	public Integer getCodEndereco() {
 		return codEndereco;
 	}
 
-	public void setCodEndereco(Long codEndereco) {
+	public void setCodEndereco(Integer codEndereco) {
 		this.codEndereco = codEndereco;
 	}
 
@@ -103,11 +96,11 @@ public class EnderecoModel {
 		this.cidade = cidade;
 	}
 
-	public short getNumero() {
+	public Short getNumero() {
 		return numero;
 	}
 
-	public void setNumero(short numero) {
+	public void setNumero(Short numero) {
 		this.numero = numero;
 	}
 
@@ -126,12 +119,12 @@ public class EnderecoModel {
 	public void setOutroResideCom(String outroResideCom) {
 		this.outroResideCom = outroResideCom;
 	}
-	
-	public AlunoModel getCodAluno() {
+
+	public AlunoModel getAluno() {
 		return aluno;
 	}
 
-	public void setCodAluno(AlunoModel aluno) {
+	public void setAluno(AlunoModel aluno) {
 		this.aluno = aluno;
 	}
 
@@ -142,7 +135,4 @@ public class EnderecoModel {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-
 }

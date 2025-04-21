@@ -27,19 +27,19 @@ public class ModalidadeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ModalidadeModel> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<ModalidadeModel> buscarPorId(@PathVariable Integer id) {
         return modalidadeService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ModalidadeModel> atualizar(@PathVariable Long id, @RequestBody ModalidadeDto dto) {
+    public ResponseEntity<ModalidadeModel> atualizar(@PathVariable Integer id, @RequestBody ModalidadeDto dto) {
         return ResponseEntity.ok(modalidadeService.atualizar(id, dto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
         modalidadeService.deletar(id);
         return ResponseEntity.noContent().build();
     }

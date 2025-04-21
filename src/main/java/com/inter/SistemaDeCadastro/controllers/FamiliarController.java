@@ -27,17 +27,17 @@ public class FamiliarController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FamiliarModel> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<FamiliarModel> buscarPorId(@PathVariable Integer id) {
         return ResponseEntity.ok(familiarService.buscarPorId(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FamiliarModel> atualizar(@PathVariable Long id, @RequestBody FamiliarDto dto) {
+    public ResponseEntity<FamiliarModel> atualizar(@PathVariable Integer id, @RequestBody FamiliarDto dto) {
         return ResponseEntity.ok(familiarService.atualizar(id, dto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
         familiarService.deletar(id);
         return ResponseEntity.noContent().build();
     }

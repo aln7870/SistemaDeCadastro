@@ -40,11 +40,11 @@ public class ContatoService {
         return contatoRepository.findAll();
     }
 
-    public Optional<ContatoModel> buscarPorId(Long id) {
+    public Optional<ContatoModel> buscarPorId(Integer id) {
         return contatoRepository.findById(id);
     }
 
-    public ContatoModel atualizarContato(Long id, ContatoDto dto) {
+    public ContatoModel atualizarContato(Integer id, ContatoDto dto) {
         ContatoModel contato = contatoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Contato não encontrado"));
 

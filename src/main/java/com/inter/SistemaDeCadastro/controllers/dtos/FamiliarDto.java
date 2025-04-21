@@ -2,24 +2,22 @@ package com.inter.SistemaDeCadastro.controllers.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
 import java.sql.Date;
 
 public record FamiliarDto(
-        Long codFamiliar,
+        @NotBlank String nome,
 
-        @NotBlank String nmFamiliar,
+        @NotBlank Date dataNasc,
 
-        @NotNull Date dtNascimento,
+        @NotNull Integer aluno,
 
-        @NotNull Long codAluno,
+        @NotNull Integer ocupacao,
 
-        @NotNull Long codOcupacao,
-
-        @NotNull Long codEscolaridade,
+        @NotNull Integer escolaridade,
 
         @NotBlank String parentesco,
 
-        @Pattern(regexp = "[AI]") String status
-) {}
+        String status
+) {
+}

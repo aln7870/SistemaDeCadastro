@@ -5,11 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 public record EnderecoDto(
-        Long codEndereco,
+        String cep,
 
-        @NotBlank String cep,
-
-        @NotBlank String rua,
+        String rua,
 
         @NotBlank String bairro,
 
@@ -19,9 +17,10 @@ public record EnderecoDto(
 
         @NotBlank String resideCom,
 
-        @NotBlank String outroResideCom,
+        String outroResideCom,
 
-        @NotNull Long codAluno,
+        @NotNull Integer codAluno,
 
-        @Pattern(regexp = "[AI]") String status
-) {}
+        String status
+) {
+}

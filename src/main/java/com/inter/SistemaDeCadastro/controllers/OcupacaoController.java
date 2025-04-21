@@ -27,19 +27,19 @@ public class OcupacaoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OcupacaoModel> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<OcupacaoModel> buscarPorId(@PathVariable Integer id) {
         return ocupacaoService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<OcupacaoModel> atualizar(@PathVariable Long id, @RequestBody OcupacaoDto dto) {
+    public ResponseEntity<OcupacaoModel> atualizar(@PathVariable Integer id, @RequestBody OcupacaoDto dto) {
         return ResponseEntity.ok(ocupacaoService.atualizar(id, dto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
         ocupacaoService.deletar(id);
         return ResponseEntity.noContent().build();
     }

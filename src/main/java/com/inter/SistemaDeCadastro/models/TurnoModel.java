@@ -15,12 +15,13 @@ public class TurnoModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codTurno;
+	@Column(name = "CodTurno")
+	private Integer codTurno;
 	
-	@Column(length = 50, nullable = false)
-	private String nmTurno;
+	@Column(name = "Nm_Turno",length = 50, nullable = false)
+	private String nome;
 	
-	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+	@Column(name = "Status",length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
     @Pattern(regexp = "[AI]")
     private String status = "A";
 
@@ -31,20 +32,20 @@ public class TurnoModel {
         }
     }
 
-	public Long getCodTurno() {
+	public Integer getCodTurno() {
 		return codTurno;
 	}
 
-	public void setCodTurno(Long codTurno) {
+	public void setCodTurno(Integer codTurno) {
 		this.codTurno = codTurno;
 	}
 
-	public String getNm_Turno() {
-		return nmTurno;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNm_Turno(String nm_Turno) {
-		this.nmTurno = nm_Turno;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getStatus() {

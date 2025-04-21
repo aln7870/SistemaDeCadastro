@@ -14,30 +14,31 @@ import jakarta.validation.constraints.Pattern;
 @Entity
 @Table(name = "Contato")
 public class ContatoModel {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codContato;
-	
-	@Column(length = 80, nullable = false)
+	@Column(name = "CodContato")
+	private Integer codContato;
+
+	@Column(name = "ResponsavelEmergencial",length = 80, nullable = false)
 	private String responsavelEmergencial;
-	
-	@Column(length = 17, nullable = false)
+
+	@Column(name = "TelefonePrincipal",length = 17, nullable = false)
 	private String telefonePrincipal;
 	
-	@Column(length = 17, nullable = false)
+	@Column(name = "TelefoneEmergencial",length = 17, nullable = false)
 	private String telefoneEmergencial;
 	
-	@Column(length = 150, nullable = false)
+	@Column(name = "Email",length = 150, nullable = false)
 	private String email;
 	
 	@ManyToOne
-    @JoinColumn(name = "codAluno", nullable = false)
+    @JoinColumn(name = "CodAluno", nullable = false)
 	private AlunoModel aluno;
 	
-	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+	@Column(name = "Status",length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
     @Pattern(regexp = "[AI]")
-    private String status = "A";
+    private String status;
 
     @PrePersist
     public void prePersist() {
@@ -46,11 +47,11 @@ public class ContatoModel {
         }
     }
 
-	public Long getCodContato() {
+	public Integer getCodContato() {
 		return codContato;
 	}
 
-	public void setCodContato(Long codContato) {
+	public void setCodContato(Integer codContato) {
 		this.codContato = codContato;
 	}
 

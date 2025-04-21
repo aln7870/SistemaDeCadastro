@@ -2,8 +2,9 @@ package com.inter.SistemaDeCadastro.models;
 
 import java.sql.Date;
 
-import com.inter.SistemaDeCadastro.models.enums.ParentescoEnum;
+
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 @Entity
@@ -12,33 +13,35 @@ public class FamiliarModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codFamiliar;
+	@Column(name = "CodFamiliar")
+	private Integer codFamiliar;
 	
-	@Column(length = 150, nullable = false)
-	private String nmFamiliar;
+	@Column(name = "Nm_Familiar",length = 150, nullable = false)
+	private String nome;
 	
-	@Column(updatable = false)
-    private Date dtNascimento;
+	@Column(name = "Dt_Nascimento",updatable = false)
+    private Date dataNasc;
 
-	@Enumerated(EnumType.STRING)
-	@Column(length = 30, nullable = false)
-	private ParentescoEnum parentesco;
+
+
+	@Column(name = "Parentesco",length = 40, nullable = false, columnDefinition = "VARCHAR(40)")
+	private String parentesco;
 	
 	@ManyToOne
-    @JoinColumn(name = "codAluno", nullable = false)
+    @JoinColumn(name = "CodAluno", nullable = false)
 	private AlunoModel aluno;
 	
 	@ManyToOne
-    @JoinColumn(name = "codOcupacao", nullable = false)
+    @JoinColumn(name = "CodOcupacao", nullable = false)
 	private OcupacaoModel ocupacao;
 	
 	@ManyToOne
-    @JoinColumn(name = "codEscolaridade", nullable = false)
+    @JoinColumn(name = "CodEscolaridade", nullable = false)
 	private EscolaridadeModel escolaridade;
 	
-	@Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+	@Column(name = "Status",length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
     @Pattern(regexp = "[AI]")
-    private String status = "A";
+    private String status;
 
     @PrePersist
     public void prePersist() {
@@ -48,28 +51,28 @@ public class FamiliarModel {
     }
 
 
-	public Long getCodFamiliar() {
+	public Integer getCodFamiliar() {
 		return codFamiliar;
 	}
 
-	public void setCodFamiliar(Long codFamiliar) {
+	public void setCodFamiliar(Integer codFamiliar) {
 		this.codFamiliar = codFamiliar;
 	}
 
-	public String getNmFamiliar() {
-		return nmFamiliar;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNmFamiliar(String nm_Familiar) {
-		this.nmFamiliar = nm_Familiar;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public Date getDtNascimento() {
-		return dtNascimento;
+	public Date getDataNasc() {
+		return dataNasc;
 	}
 
-	public void setDtNascimento(Date dtNascimento) {
-		this.dtNascimento = dtNascimento;
+	public void setDataNasc(Date dataNasc) {
+		this.dataNasc = dataNasc;
 	}
 
 	public AlunoModel getAluno() {
@@ -104,11 +107,11 @@ public class FamiliarModel {
 		this.status = status;
 	}
 
-	public ParentescoEnum getParentesco() {
+	public String getParentesco() {
 		return parentesco;
 	}
 
-	public void setParentesco(ParentescoEnum parentesco) {
+	public void setParentesco(String parentesco) {
 		this.parentesco = parentesco;
 	}
 }

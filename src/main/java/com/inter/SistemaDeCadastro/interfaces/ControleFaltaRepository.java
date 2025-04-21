@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ControleFaltaRepository extends JpaRepository<ControleFaltaModel,Long> {
-    List<ControleFaltaModel> findByAluno(AlunoModel aluno);
+public interface ControleFaltaRepository extends JpaRepository<ControleFaltaModel,Integer> {
+ //   List<ControleFaltaModel> findByAluno(AlunoModel aluno);
 
 }

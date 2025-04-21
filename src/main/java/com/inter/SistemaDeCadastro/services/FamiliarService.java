@@ -10,7 +10,6 @@ import com.inter.SistemaDeCadastro.models.EscolaridadeModel;
 import com.inter.SistemaDeCadastro.models.FamiliarModel;
 import com.inter.SistemaDeCadastro.models.OcupacaoModel;
 
-import com.inter.SistemaDeCadastro.models.enums.ParentescoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,21 +32,19 @@ public class FamiliarService {
 
     public FamiliarModel criar(FamiliarDto dto) {
         FamiliarModel familiar = new FamiliarModel();
-        familiar.setNmFamiliar(dto.nmFamiliar());
-        familiar.setDtNascimento(dto.dtNascimento());
+        familiar.setNome(dto.nome());
+        familiar.setDataNasc(dto.dataNasc());
         familiar.setStatus(dto.status());
+        familiar.setParentesco(dto.parentesco());
 
-        // Converte o campo 'parentesco' para o enum
-        ParentescoEnum parentesco = ParentescoEnum.from(dto.parentesco());
-        familiar.setParentesco(parentesco);  // Define o parentesco no familiar
 
-        AlunoModel aluno = alunoRepository.findById(dto.codAluno())
+        AlunoModel aluno = alunoRepository.findById(dto.aluno())
                 .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
 
-        OcupacaoModel ocupacao = ocupacaoRepository.findById(dto.codOcupacao())
+        OcupacaoModel ocupacao = ocupacaoRepository.findById(dto.ocupacao())
                 .orElseThrow(() -> new RuntimeException("Ocupação não encontrada"));
 
-        EscolaridadeModel escolaridade = escolaridadeRepository.findById(dto.codEscolaridade())
+        EscolaridadeModel escolaridade = escolaridadeRepository.findById(dto.escolaridade())
                 .orElseThrow(() -> new RuntimeException("Escolaridade não encontrada"));
 
         familiar.setAluno(aluno);
@@ -61,23 +58,20 @@ public class FamiliarService {
         return familiarRepository.findAll();
     }
 
-    public FamiliarModel atualizar(Long id, FamiliarDto dto) {
+    public FamiliarModel atualizar(Integer id, FamiliarDto dto) {
         FamiliarModel familiar = familiarRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Familiar não encontrado"));
 
-        familiar.setNmFamiliar(dto.nmFamiliar());
-        familiar.setDtNascimento(dto.dtNascimento());
+        familiar.setNome(dto.nome());
+        familiar.setDataNasc(dto.dataNasc());
         familiar.setStatus(dto.status());
+        familiar.setParentesco(dto.parentesco());
 
-        // Converte novamente o parentesco para o enum
-        ParentescoEnum parentesco = ParentescoEnum.from(dto.parentesco());
-        familiar.setParentesco(parentesco);
-
-        AlunoModel aluno = alunoRepository.findById(dto.codAluno())
+        AlunoModel aluno = alunoRepository.findById(dto.aluno())
                 .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
-        OcupacaoModel ocupacao = ocupacaoRepository.findById(dto.codOcupacao())
+        OcupacaoModel ocupacao = ocupacaoRepository.findById(dto.ocupacao())
                 .orElseThrow(() -> new RuntimeException("Ocupação não encontrada"));
-        EscolaridadeModel escolaridade = escolaridadeRepository.findById(dto.codEscolaridade())
+        EscolaridadeModel escolaridade = escolaridadeRepository.findById(dto.escolaridade())
                 .orElseThrow(() -> new RuntimeException("Escolaridade não encontrada"));
 
         familiar.setAluno(aluno);
@@ -87,11 +81,11 @@ public class FamiliarService {
         return familiarRepository.save(familiar);
     }
 
-    public void deletar(Long id) {
+    public void deletar(Integer id) {
         familiarRepository.deleteById(id);
     }
 
-    public FamiliarModel buscarPorId(Long id) {
+    public FamiliarModel buscarPorId(Integer id) {
         return familiarRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Familiar não encontrado"));
     }

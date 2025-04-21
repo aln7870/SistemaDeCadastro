@@ -3,22 +3,27 @@ package com.inter.SistemaDeCadastro.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 
+import java.util.Set;
+
 @Entity
-@Table(name = "roles")
+@Table(name = "Role")
 public class RoleModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "INT UNSIGNED")
-    private Long idRole;
+    @Column(name = "CodRole",columnDefinition = "INT UNSIGNED")
+    private Integer idRole;
 
-    @Column(length = 70)
+    @Column(name = "Nm_Role",length = 70)
     private String nome;
 
     //aceitar somente A OU I em status
-    @Column(length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
+    @Column(name = "Status",length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
     @Pattern(regexp = "[AI]")
     private String status = "A";
+
+    @OneToMany(mappedBy = "role")
+    private Set<UsuarioRoleModel> usuarioRoles;
 
     // validando que por padrão status tera A
     @PrePersist
@@ -29,12 +34,12 @@ public class RoleModel {
     }
 
     public enum values {
-        ADMIN(1L),
-        USER(2L);
+        ADMIN(1),
+        USER(2);
 
-        Long roleId;
+        Integer roleId;
 
-        values(Long roleId) {
+        values(Integer roleId) {
             this.roleId = roleId;
         }
 
@@ -47,11 +52,11 @@ public class RoleModel {
         this.nome = nome;
     }
 
-    public Long getIdRole() {
+    public Integer getIdRole() {
         return idRole;
     }
 
-    public void setIdRole(Long idRole) {
+    public void setIdRole(Integer idRole) {
         this.idRole = idRole;
     }
 

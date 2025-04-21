@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ContatoRepository extends JpaRepository<ContatoModel,Long> {
+public interface ContatoRepository extends JpaRepository<ContatoModel,Integer> {
     List<ContatoModel> findByAluno(AlunoModel aluno);
     List<ContatoModel> findByStatus(String status);
 }

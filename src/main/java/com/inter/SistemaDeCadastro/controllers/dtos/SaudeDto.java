@@ -5,17 +5,16 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public record SaudeDto(
-        Long codSaude,
 
-        @Size(max = 255) String descricaoAlergia,
+       String descricaoAlergia,
 
-        @Size(max = 255) String descricaoMedicacao,
+       String descricaoMedicacao,
 
-        @Size(max = 255) String descricaoProblemaSaude,
+        String descricaoProblemaSaude,
 
-        @Size(max = 255) String tipoDeficiencia,
+        String tipoDeficiencia,
 
-        @Pattern(regexp = "[AI]") String status,
+        String status,
 
-        @NotNull Long codAluno
+        @NotNull Integer codAluno
 ) {}

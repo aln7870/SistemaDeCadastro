@@ -1,12 +1,12 @@
 package com.inter.SistemaDeCadastro.models;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
-import com.inter.SistemaDeCadastro.models.enums.NacionalidadeAlunoEnum;
-import com.inter.SistemaDeCadastro.models.enums.StatusFaltaEnum;
 import com.inter.SistemaDeCadastro.models.enums.TipoFaltaEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "ControleFalta")
@@ -14,26 +14,25 @@ public class ControleFaltaModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codControleFalta;
+	@Column(name = "CodControleFalta")
+	private Integer codControleFalta;
 	
 	@Column(name = "Falta" ,length = 1, columnDefinition = "CHAR(1) DEFAULT 'P'")
     @Pattern(regexp = "[PF]")
-    private String falta = "P";
+    private String falta;
 	
 	@Column(name = "DataFalta" ,updatable = false)
-    private Date dataFalta;
-	
-	@ManyToOne
+	@CreationTimestamp
+    private LocalDateTime dataFalta;
+
+	// não tem no banco, alterar dps
+/*	@ManyToOne
     @JoinColumn(name = "CodAluno", nullable = false)
 	private AlunoModel aluno;
-	
+*/
 	@ManyToOne
-    @JoinColumn(name = "codInscricaoModalidade", nullable = false)
+    @JoinColumn(name = "CodInscricaoModalidade", nullable = false)
 	private InscricaoModalidadeModel inscricaoModalidade;
-
-	@Column(name = "StatusFalta", columnDefinition = "ENUM('PENDENTE', 'CONFIRMADO') DEFAULT 'PENDENTE'")
-	@Enumerated(EnumType.STRING)
-	private StatusFaltaEnum statusFalta;
 
 	@Column(name = "TipoFalta", columnDefinition = "ENUM('REFORCO', 'MODALIDADE')")
 	@Enumerated(EnumType.STRING)
@@ -41,7 +40,7 @@ public class ControleFaltaModel {
 	
 	@Column(name = "Status", length = 1, columnDefinition = "CHAR(1) DEFAULT 'A'")
     @Pattern(regexp = "[AI]")
-    private String status = "A";
+    private String status;
 
 	@PrePersist
 	public void prePersist() {
@@ -53,11 +52,11 @@ public class ControleFaltaModel {
 		}
 	}
 
-	public Long getCodControleFalta() {
+	public Integer getCodControleFalta() {
 		return codControleFalta;
 	}
 
-	public void setCodControleFalta(Long codControleFalta) {
+	public void setCodControleFalta(Integer codControleFalta) {
 		this.codControleFalta = codControleFalta;
 	}
 
@@ -69,28 +68,12 @@ public class ControleFaltaModel {
 		this.falta = falta;
 	}
 
-	public Date getDataFalta() {
-		return dataFalta;
-	}
-
-	public void setDataFalta(Date dataFalta) {
-		this.dataFalta = dataFalta;
-	}
-
 	public InscricaoModalidadeModel getInscricaoModalidade() {
 		return inscricaoModalidade;
 	}
 
 	public void setInscricaoModalidade(InscricaoModalidadeModel inscricaoModalidade) {
 		this.inscricaoModalidade = inscricaoModalidade;
-	}
-
-	public StatusFaltaEnum getStatusFalta() {
-		return statusFalta;
-	}
-
-	public void setStatusFalta(StatusFaltaEnum statusFalta) {
-		this.statusFalta = statusFalta;
 	}
 
 	public TipoFaltaEnum getTipoFalta() {
@@ -109,12 +92,5 @@ public class ControleFaltaModel {
 		this.status = status;
 	}
 
-	public AlunoModel getAluno() {
-		return aluno;
-	}
-
-	public void setAluno(AlunoModel aluno) {
-		this.aluno = aluno;
-	}
 }
 

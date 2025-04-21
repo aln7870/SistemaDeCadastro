@@ -39,15 +39,15 @@ public class SaudeService {
         return repository.findAll();
     }
 
-    public SaudeModel findById(Long id) {
+    public SaudeModel findById(Integer id) {
         return repository.findById(id).orElse(null);
     }
 
-    public void delete(Long id) {
+    public void delete(Integer id) {
         repository.deleteById(id);
     }
 
-    public SaudeModel update(Long id, SaudeDto dto) {
+    public SaudeModel update(Integer id, SaudeDto dto) {
         SaudeModel model = repository.findById(id).orElse(null);
         if (model != null) {
             model.setDescricaoAlergia(dto.descricaoAlergia());

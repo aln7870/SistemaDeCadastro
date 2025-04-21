@@ -26,17 +26,17 @@ public class TurnoController {
     }
 
     @GetMapping("/{id}")
-    public TurnoModel getById(@PathVariable Long id) {
+    public TurnoModel getById(@PathVariable Integer id) {
         return service.findById(id);
     }
 
     @PutMapping("/{id}")
-    public TurnoModel update(@PathVariable Long id, @RequestBody TurnoDto dto) {
+    public TurnoModel update(@PathVariable Integer id, @RequestBody TurnoDto dto) {
         return service.update(id, dto);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Integer id) {
         service.delete(id);
     }
 }

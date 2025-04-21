@@ -42,13 +42,13 @@ public class EscolaridadeService {
     }
 
     // Método para buscar escolaridade por ID
-    public Optional<EscolaridadeDto> buscarPorId(Long id) {
+    public Optional<EscolaridadeDto> buscarPorId(Integer id) {
         Optional<EscolaridadeModel> escolaridadeModel = escolaridadeRepository.findById(id);
         return escolaridadeModel.map(e -> new EscolaridadeDto(e.getCodEscolaridade(), e.getNm_Escolaridade(), e.getStatus()));
     }
 
     // Método para atualizar a escolaridade
-    public EscolaridadeDto atualizar(Long id, EscolaridadeDto escolaridadeDto) {
+    public EscolaridadeDto atualizar(Integer id, EscolaridadeDto escolaridadeDto) {
         return escolaridadeRepository.findById(id)
                 .map(e -> {
                     e.setNm_Escolaridade(escolaridadeDto.nome());
@@ -64,7 +64,7 @@ public class EscolaridadeService {
     }
 
     // Método para deletar a escolaridade
-    public void deletar(Long id) {
+    public void deletar(Integer id) {
         escolaridadeRepository.deleteById(id);
     }
 }
