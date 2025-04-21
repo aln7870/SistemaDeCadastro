@@ -2,6 +2,7 @@ package com.inter.SistemaDeCadastro.controllers;
 
 import com.inter.SistemaDeCadastro.controllers.dtos.AlunoDto;
 import com.inter.SistemaDeCadastro.controllers.dtos.AlunoResponseDto;
+import com.inter.SistemaDeCadastro.controllers.dtos.views.AlunoPorModalidadeDto;
 import com.inter.SistemaDeCadastro.interfaces.UserRepository;
 import com.inter.SistemaDeCadastro.models.AlunoModel;
 import com.inter.SistemaDeCadastro.services.AlunoService;
@@ -37,6 +38,22 @@ public class AlunoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(novoAluno);
     }
 
+    //teste view
+    @GetMapping("/view")
+    public ResponseEntity<List<AlunoPorModalidadeDto>> listarAlunosPorModalidade() {
+        List<AlunoPorModalidadeDto> alunos = alunoService.listarAlunosPorModalidade();
+        return ResponseEntity.ok(alunos);
+    }
+/* teste com a procedure
+    // Endpoint para filtrar alunos por nome e modalidade
+    @GetMapping("/filtrar")
+    public ResponseEntity<List<AlunoPorModalidadeDto>> filtrarAlunosPorModalidade(
+            @RequestParam(required = false) String nomeAluno,
+            @RequestParam(required = false) Integer codModalidade) {
+        List<AlunoPorModalidadeDto> alunosFiltrados = alunoService.filtrarAlunosPorModalidade(nomeAluno, codModalidade);
+        return ResponseEntity.ok(alunosFiltrados);
+    }
+*/
     @GetMapping
     public ResponseEntity<List<AlunoResponseDto>> listarAlunos() {
         List<AlunoResponseDto> alunos = alunoService.listarAlunos();

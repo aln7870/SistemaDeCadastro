@@ -38,6 +38,16 @@ public class AlunoService {
     @Autowired
     AlunoJdbcRepository alunoJdbcRepository;
 
+    //testando a view
+    public List<AlunoPorModalidadeDto> listarAlunosPorModalidade(){
+        return alunoJdbcRepository.buscarTodosAlunosAtivosPorModalidade();
+    }
+/*
+    // Novo método que chama a stored procedure
+    public List<AlunoPorModalidadeDto> filtrarAlunosPorModalidade(String nomeAluno, Integer codModalidade) {
+        return alunoJdbcRepository.filtrarAlunosPorModalidade(nomeAluno, codModalidade);
+    }
+*/
     // Método para listar todos os alunos
     public List<AlunoResponseDto> listarAlunos() {
         List<AlunoModel> alunos = alunoRepository.findAll();
