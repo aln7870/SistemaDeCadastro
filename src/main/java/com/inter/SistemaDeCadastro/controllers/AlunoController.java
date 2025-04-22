@@ -44,7 +44,7 @@ public class AlunoController {
         List<AlunoPorModalidadeDto> alunos = alunoService.listarAlunosPorModalidade();
         return ResponseEntity.ok(alunos);
     }
-/* teste com a procedure
+
     // Endpoint para filtrar alunos por nome e modalidade
     @GetMapping("/filtrar")
     public ResponseEntity<List<AlunoPorModalidadeDto>> filtrarAlunosPorModalidade(
@@ -53,7 +53,7 @@ public class AlunoController {
         List<AlunoPorModalidadeDto> alunosFiltrados = alunoService.filtrarAlunosPorModalidade(nomeAluno, codModalidade);
         return ResponseEntity.ok(alunosFiltrados);
     }
-*/
+
     @GetMapping
     public ResponseEntity<List<AlunoResponseDto>> listarAlunos() {
         List<AlunoResponseDto> alunos = alunoService.listarAlunos();

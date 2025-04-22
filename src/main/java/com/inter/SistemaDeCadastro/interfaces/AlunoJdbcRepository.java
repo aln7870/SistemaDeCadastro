@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -24,14 +25,15 @@ public class AlunoJdbcRepository {
         return jdbcTemplate.query(sql, (rs, rowNum) -> new AlunoPorModalidadeDto(
                 rs.getInt("CodAluno"),
                 rs.getString("Nm_Aluno"),
-                rs.getObject("CodModalidade", Integer.class), // caso possa ser null
-                rs.getString("StatusAluno"),
-                rs.getString("StatusModalidade")
+                rs.getObject("CodModalidade", Integer.class) // caso possa ser null
+//                rs.getString("StatusAluno"),
+//                rs.getString("StatusModalidade")
         ));
     }
-/*
-    // Novo método para chamar a stored procedure
+
     public List<AlunoPorModalidadeDto> filtrarAlunosPorModalidade(String nomeAluno, Integer codModalidade) {
+
+        nomeAluno = (nomeAluno != null && nomeAluno.trim().isEmpty()) ? null : nomeAluno;
         // SQL para chamar a stored procedure
         String sql = "CALL sp_Filtrar_Alunos_Por_Modalidade(?, ?)";
 
@@ -40,11 +42,13 @@ public class AlunoJdbcRepository {
 
         // Converte o resultado para o DTO AlunoPorModalidadeDto
         return result.stream().map(row -> new AlunoPorModalidadeDto(
-                (Integer) row.get("CodAluno"), // Certifique-se de que CodAluno é Integer
-                (String) row.get("Nm_Aluno"),  // Nome do aluno
-                row.get("CodModalidade") != null ? (Integer) row.get("CodModalidade") : null, // Tratando o valor null
-                (String) row.get("StatusAluno"),
-                (String) row.get("StatusModalidade")
+                row.get("CodAluno") != null ? ((Number) row.get("CodAluno")).intValue() : null,
+                (String) row.get("Nm_Aluno"),
+                row.get("CodModalidade") != null ? ((Number) row.get("CodModalidade")).intValue() : null
+//                (String) row.get("StatusAluno"),
+//                (String) row.get("StatusModalidade")
         )).toList();
-    }*/
+    }
+
+
 }
