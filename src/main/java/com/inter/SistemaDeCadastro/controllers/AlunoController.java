@@ -3,16 +3,19 @@ package com.inter.SistemaDeCadastro.controllers;
 import com.inter.SistemaDeCadastro.controllers.dtos.AlunoDto;
 import com.inter.SistemaDeCadastro.controllers.dtos.AlunoResponseDto;
 import com.inter.SistemaDeCadastro.controllers.dtos.views.AlunoPorModalidadeDto;
+import com.inter.SistemaDeCadastro.controllers.dtos.views.ListaPresencaDto;
 import com.inter.SistemaDeCadastro.interfaces.UserRepository;
 import com.inter.SistemaDeCadastro.models.AlunoModel;
 import com.inter.SistemaDeCadastro.services.AlunoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +55,16 @@ public class AlunoController {
             @RequestParam(required = false) Integer codModalidade) {
         List<AlunoPorModalidadeDto> alunosFiltrados = alunoService.filtrarAlunosPorModalidade(nomeAluno, codModalidade);
         return ResponseEntity.ok(alunosFiltrados);
+    }
+    //Endpoint Listar presença
+    @GetMapping("/presenca")
+    public ResponseEntity<List<ListaPresencaDto>> buscarPresencas(
+            @RequestParam(required = false) Integer codModalidade,
+            @RequestParam(required = false) Integer codTurno,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data
+    ) {
+        List<ListaPresencaDto> presencas = alunoService.buscarPresencasFiltradas(codModalidade, codTurno, data);
+        return ResponseEntity.ok(presencas);
     }
 
     @GetMapping

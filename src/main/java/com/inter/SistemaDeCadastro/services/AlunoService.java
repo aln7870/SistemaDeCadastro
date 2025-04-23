@@ -3,10 +3,8 @@ package com.inter.SistemaDeCadastro.services;
 import com.inter.SistemaDeCadastro.controllers.dtos.AlunoDto;
 import com.inter.SistemaDeCadastro.controllers.dtos.AlunoResponseDto;
 import com.inter.SistemaDeCadastro.controllers.dtos.views.AlunoPorModalidadeDto;
-import com.inter.SistemaDeCadastro.interfaces.AlunoJdbcRepository;
-import com.inter.SistemaDeCadastro.interfaces.AlunoRepository;
-import com.inter.SistemaDeCadastro.interfaces.EscolaridadeRepository;
-import com.inter.SistemaDeCadastro.interfaces.UserRepository;
+import com.inter.SistemaDeCadastro.controllers.dtos.views.ListaPresencaDto;
+import com.inter.SistemaDeCadastro.interfaces.*;
 import com.inter.SistemaDeCadastro.models.AlunoModel;
 import com.inter.SistemaDeCadastro.models.EscolaridadeModel;
 import com.inter.SistemaDeCadastro.models.UserModel;
@@ -14,11 +12,9 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,6 +34,9 @@ public class AlunoService {
     @Autowired
     AlunoJdbcRepository alunoJdbcRepository;
 
+    @Autowired
+    private PresencaJdbcRepository presencaJdbcRepository;
+
     //testando a view
     public List<AlunoPorModalidadeDto> listarAlunosPorModalidade(){
         return alunoJdbcRepository.buscarTodosAlunosAtivosPorModalidade();
@@ -52,6 +51,11 @@ public class AlunoService {
     public List<AlunoResponseDto> listarAlunos() {
         List<AlunoModel> alunos = alunoRepository.findAll();
         return alunos.stream().map(this::mapToAlunoResponseDto).collect(Collectors.toList());
+    }
+    //Método para listar presença
+
+    public List<ListaPresencaDto> buscarPresencasFiltradas(Integer codModalidade, Integer codTurno, LocalDate dataFalta) {
+        return presencaJdbcRepository.buscarPresencasFiltradas(codModalidade, codTurno, dataFalta);
     }
 
     private AlunoResponseDto mapToAlunoResponseDto(AlunoModel aluno) {
