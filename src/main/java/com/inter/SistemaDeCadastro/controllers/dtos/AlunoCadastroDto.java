@@ -1,0 +1,41 @@
+package com.inter.SistemaDeCadastro.controllers.dtos;
+
+import java.time.LocalDate;
+
+public record AlunoCadastroDto(
+        String nomeAluno,
+        LocalDate dataNascimento,
+        String sexo,
+        String cpf,
+        String rg,
+        String nacionalidade,
+        Integer codEscolaridade,
+        Integer codUsuario,
+        // Endereço
+        String cep,
+        String rua,
+        String bairro,
+        String cidade,
+        Integer numero,
+        String resideCom,
+        String outroResideCom,
+        // Contato
+        String responsavelEmergencial,
+        String telefonePrincipal,
+        String telefoneEmergencial,
+        String email,
+        // Saúde
+        String descricaoAlergia,
+        String descricaoMedicacao,
+        String descricaoProblemaSaude,
+        String tipoDeficienca,
+        // Familiar
+        String nomeFamiliar,
+        LocalDate dataNascimentoFamiliar,
+        String parentesco,
+        Integer codEscolaridadeFamiliar,
+        Integer codOcupacaoFamiliar,
+        // Inscrição
+        Integer codModalidade,
+        Integer codTurno
+) {}

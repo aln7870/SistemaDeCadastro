@@ -61,7 +61,7 @@ public class AlunoController {
     public ResponseEntity<List<ListaPresencaDto>> buscarPresencas(
             @RequestParam(required = false) Integer codModalidade,
             @RequestParam(required = false) Integer codTurno,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data
+            @RequestParam(name = "dataFalta",required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data
     ) {
         List<ListaPresencaDto> presencas = alunoService.buscarPresencasFiltradas(codModalidade, codTurno, data);
         return ResponseEntity.ok(presencas);
