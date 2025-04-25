@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ocupacao")
+@CrossOrigin("*")
 public class OcupacaoController {
 
     @Autowired

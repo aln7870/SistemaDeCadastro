@@ -1,6 +1,7 @@
 package com.inter.SistemaDeCadastro.models;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.inter.SistemaDeCadastro.models.enums.TipoFaltaEnum;
@@ -23,7 +24,7 @@ public class ControleFaltaModel {
 	
 	@Column(name = "DataFalta" ,updatable = false)
 	@CreationTimestamp
-    private LocalDateTime dataFalta;
+    private LocalDate dataFalta;
 
 	// não tem no banco, alterar dps
 /*	@ManyToOne

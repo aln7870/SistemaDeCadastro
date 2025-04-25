@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/inscricaoModalidade")
+@CrossOrigin("*")
 public class InscricaoModalidadeController {
 
     @Autowired

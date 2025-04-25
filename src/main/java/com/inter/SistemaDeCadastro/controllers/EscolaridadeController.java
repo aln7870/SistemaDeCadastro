@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/escolaridade")
+@CrossOrigin("*")
 public class EscolaridadeController {
 
     @Autowired

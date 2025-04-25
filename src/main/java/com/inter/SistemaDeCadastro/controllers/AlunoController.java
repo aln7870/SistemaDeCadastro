@@ -21,6 +21,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/aluno")
+@CrossOrigin("*")
 public class AlunoController {
 
     @Autowired

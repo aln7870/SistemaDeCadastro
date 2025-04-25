@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/saude")
+@CrossOrigin("*")
 public class SaudeController {
 
     @Autowired
