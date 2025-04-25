@@ -1,41 +1,49 @@
 package com.inter.SistemaDeCadastro.controllers.dtos;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
 public record AlunoCadastroDto(
-        String nomeAluno,
-        LocalDate dataNascimento,
-        String sexo,
-        String cpf,
-        String rg,
-        String nacionalidade,
-        Integer codEscolaridade,
+        @NotBlank String nomeAluno,
+        @NotNull LocalDate dataNascimento,
+        @NotBlank String sexo,
+        @NotBlank String cpf,
+        @NotBlank String rg,
+        @NotBlank String nacionalidade,
+        @NotNull Integer codEscolaridade,
         Integer codUsuario,
+
         // Endereço
-        String cep,
-        String rua,
-        String bairro,
-        String cidade,
-        Integer numero,
-        String resideCom,
-        String outroResideCom,
+        @NotBlank String cep,
+        @NotBlank String rua,
+        @NotBlank String bairro,
+        @NotBlank String cidade,
+        @NotNull Integer numero,
+        @NotBlank String resideCom,
+        @NotBlank String outroResideCom,
+
         // Contato
-        String responsavelEmergencial,
-        String telefonePrincipal,
-        String telefoneEmergencial,
-        String email,
+        @NotBlank String responsavelEmergencial,
+        @NotBlank String telefonePrincipal,
+        @NotBlank String telefoneEmergencial,
+        @NotBlank String email,
+
         // Saúde
-        String descricaoAlergia,
-        String descricaoMedicacao,
-        String descricaoProblemaSaude,
-        String tipoDeficienca,
+        @NotBlank String descricaoAlergia,
+        @NotBlank String descricaoMedicacao,
+        @NotBlank String descricaoProblemaSaude,
+        @NotBlank String tipoDeficienca,
+
         // Familiar
-        String nomeFamiliar,
-        LocalDate dataNascimentoFamiliar,
-        String parentesco,
-        Integer codEscolaridadeFamiliar,
-        Integer codOcupacaoFamiliar,
+        @NotBlank String nomeFamiliar,
+        @NotNull LocalDate dataNascimentoFamiliar,
+        @NotBlank String parentesco,
+        @NotNull Integer codEscolaridadeFamiliar,
+        @NotNull Integer codOcupacaoFamiliar,
+
         // Inscrição
-        Integer codModalidade,
-        Integer codTurno
+        @NotNull Integer codModalidade,
+        @NotNull Integer codTurno
 ) {}
