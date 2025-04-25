@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/controleFalta")
+@CrossOrigin("*")
 public class ControleFaltaController {
 
     @Autowired
